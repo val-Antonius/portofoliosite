@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --bg-canvas:       #F5F2EC;
+  --bg-card:         #FFFFFF;
+  --border:          #E0D9CC;
+  --text-primary:    #1C1A17;
+  --text-secondary:  #6B6560;
+  --accent-amber:    #D4872B;
+  --accent-green:    #2A9D6F;
+  --accent-red:      #C1121F;
+  --accent-amber-bg: #FFF8EE;
+  --grid-line:       #E8E2D9;
+}
+
+@theme inline {
+  --color-canvas: var(--bg-canvas);
+  --color-card: var(--bg-card);
+  --color-border: var(--border);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-amber: var(--accent-amber);
+  --color-green: var(--accent-green);
+  --color-red: var(--accent-red);
+  --color-amber-bg: var(--accent-amber-bg);
+  --color-grid: var(--grid-line);
+
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --font-sans: var(--font-sans);
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
