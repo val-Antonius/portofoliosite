@@ -9,15 +9,15 @@ interface MascotProps {
 }
 
 const poseMap: Record<string, string> = {
-  overview: "/svg/desk.svg",
-  work: "/svg/profiles.svg",
+  overview: "/svg/profiles.svg",
+  work: "/svg/desk.svg",
   skills: "/svg/thinking.svg",
   about: "/svg/welcome.svg",
   contact: "/svg/welcome.svg",
 };
 
 export default function Mascot({ pose, className = "", isSmall = false }: MascotProps) {
-  const src = poseMap[pose] || "/svg/desk.svg";
+  const src = poseMap[pose] || "/svg/profiles.svg";
 
   return (
     <motion.div

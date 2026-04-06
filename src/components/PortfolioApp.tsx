@@ -2,17 +2,17 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useChapter } from "../hooks/useChapter";
-import ChapterNav from "./layout/ChapterNav";
-import TopBar from "./layout/TopBar";
-import CVSidePanel from "./layout/CVSidePanel";
-import LoadingScreen from "./layout/LoadingScreen";
+import { useChapter } from "@/hooks/useChapter";
+import ChapterNav from "@/components/layout/ChapterNav";
+import TopBar from "@/components/layout/TopBar";
+import CVSidePanel from "@/components/layout/CVSidePanel";
+import LoadingScreen from "@/components/layout/LoadingScreen";
 
-import OverviewChapter from "./chapters/OverviewChapter";
-import WorkChapter from "./chapters/WorkChapter";
-import SkillsChapter from "./chapters/SkillsChapter";
-import AboutChapter from "./chapters/AboutChapter";
-import ContactChapter from "./chapters/ContactChapter";
+import OverviewChapter from "@/components/chapters/OverviewChapter";
+import WorkChapter from "@/components/chapters/WorkChapter";
+import SkillsChapter from "@/components/chapters/SkillsChapter";
+import AboutChapter from "@/components/chapters/AboutChapter";
+import ContactChapter from "@/components/chapters/ContactChapter";
 
 const chapterComponents: Record<string, React.FC> = {
   overview: OverviewChapter,
