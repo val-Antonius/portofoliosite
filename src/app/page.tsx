@@ -1,7 +1,12 @@
 "use client";
 
 import PortfolioApp from "@/components/PortfolioApp";
+import { PortfolioProvider } from "@/context/PortfolioContext";
 
 export default function Home() {
-  return <PortfolioApp />;
+  return (
+    <PortfolioProvider>
+      <PortfolioApp />
+    </PortfolioProvider>
+  );
 }

@@ -56,3 +56,15 @@ body::before {
   border-radius: 8px;
   padding: 20px;
 }
+
+/* 3D Transform Utilities for Flip Card */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+

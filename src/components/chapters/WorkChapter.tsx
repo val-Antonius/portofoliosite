@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { portfolioData } from "../../data/portfolio";
+import { usePortfolioContext } from "../../context/PortfolioContext";
 import ProjectCard from "../project/ProjectCard";
 import ProjectDetail from "../project/ProjectDetail";
 
@@ -17,7 +17,7 @@ const itemAnim = {
 };
 
 export default function WorkChapter() {
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const { selectedProjectId, setSelectedProjectId } = usePortfolioContext();
 
   const selectedProject = portfolioData.projects.find(p => p.id === selectedProjectId);
 

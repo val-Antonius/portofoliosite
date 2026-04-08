@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useChapter } from "@/hooks/useChapter";
+import { usePortfolioContext } from "@/context/PortfolioContext";
 import ChapterNav from "@/components/layout/ChapterNav";
 import TopBar from "@/components/layout/TopBar";
 import CVSidePanel from "@/components/layout/CVSidePanel";
@@ -25,7 +25,7 @@ const chapterComponents: Record<string, React.FC> = {
 export default function PortfolioApp() {
   const [loading, setLoading] = useState(true);
   const [panelOpen, setPanelOpen] = useState(false);
-  const { currentChapter, chapters, setChapter } = useChapter();
+  const { currentChapter, chapters, setChapter } = usePortfolioContext();
 
   const ActiveComponent = chapterComponents[currentChapter.id] || OverviewChapter;
 
