@@ -20,6 +20,7 @@ export const portfolioData: PortfolioData = {
         "Improved workflow visibility and minimized rework caused by inconsistent metadata.",
         "Resulted in faster end-to-end content readiness."
       ],
+      category: 'web',
       techTags: ["JavaScript", "SQL", "Workflows", "Dashboard"],
       metrics: [
         { label: "Coordination Time", value: "40", prefix: "-", suffix: "%", isPrimary: true, isPositive: true },
@@ -38,6 +39,7 @@ export const portfolioData: PortfolioData = {
         "Automated core workflows including POS transactions, inventory control, and customer management.",
         "Achieved 90% functional stability in black-box testing."
       ],
+      category: 'web',
       techTags: ["TypeScript", "Ollama LLM", "Analytics", "POS"],
       metrics: [
         { label: "Analysis Time", value: "7", suffix: "m", isPrimary: true, isPositive: true },
@@ -55,6 +57,7 @@ export const portfolioData: PortfolioData = {
         "Streamlined operational workflows by digitizing borrowing and return processes.",
         "Improved accountability, traceability, and operational efficiency."
       ],
+      category: 'web',
       techTags: ["Web App", "Dashboards", "Tracking"],
       metrics: [
         { label: "Traceability", value: "100", suffix: "%", isPositive: true },
@@ -72,6 +75,7 @@ export const portfolioData: PortfolioData = {
         "Successfully identified palm oil quality as suitable or unsuitable for use based on turbidity.",
         "Official copyright recognition by DJKI, valid for 50 years."
       ],
+      category: 'web',
       techTags: ["IoT", "Mobile UI/UX", "System Architecture"],
       metrics: [
         { label: "Detection Accuracy", value: "95", suffix: "%", isPositive: true },

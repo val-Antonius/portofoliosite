@@ -37,10 +37,9 @@ export default function ChapterNav({ chapters, currentId, onSelect }: ChapterNav
               onClick={() => onSelect(chapter.id)}
               className="flex flex-col items-center gap-3 group relative cursor-pointer"
             >
-              <div 
-                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all bg-card border shadow-sm overflow-hidden ${
-                  isActive ? "border-amber text-amber scale-110" : "border-border text-primary group-hover:border-amber"
-                }`}
+              <div
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all bg-card border shadow-sm overflow-hidden ${isActive ? "border-amber text-amber scale-110" : "border-border text-primary group-hover:border-amber"
+                  }`}
               >
                 <AnimatePresence mode="wait">
                   {isActive ? (
@@ -68,9 +67,8 @@ export default function ChapterNav({ chapters, currentId, onSelect }: ChapterNav
                   )}
                 </AnimatePresence>
               </div>
-              <span className={`text-[10px] md:text-[11px] uppercase tracking-widest whitespace-nowrap transition-colors ${
-                isActive ? "text-amber font-bold" : "text-secondary font-medium"
-              }`}>
+              <span className={`text-[10px] md:text-[11px] uppercase tracking-widest whitespace-nowrap transition-colors ${isActive ? "text-amber font-bold" : "text-secondary font-medium"
+                }`}>
                 {chapter.id}
               </span>
             </button>

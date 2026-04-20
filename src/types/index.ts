@@ -14,6 +14,7 @@ export interface Project {
   type: string;
   description: string;
   impact: string[];
+  category?: 'web' | 'ds-ml';
   techTags: string[];
   metrics: ProjectMetric[];
 }
