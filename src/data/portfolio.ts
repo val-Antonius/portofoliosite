@@ -82,6 +82,24 @@ export const portfolioData: PortfolioData = {
         { label: "IP Registration", value: "100", suffix: "%", isPositive: true },
         { label: "Copyright validity", value: "50", suffix: "y", isPositive: true }
       ]
+    },
+    {
+      id: "scoring-credit",
+      title: "SHAP Scoring Credit System ",
+      timeline: "Feb 2026",
+      type: "Machine Learning & Decision Support System",
+      description: "Machine learning and decision support system for credit scoring. This system uses machine learning techniques to assess the creditworthiness of individuals, helping lenders make more informed lending decisions.",
+      impact: [
+        "Successfully identified palm oil quality as suitable or unsuitable for use based on turbidity.",
+        "Official copyright recognition by DJKI, valid for 50 years."
+      ],
+      category: 'ds-ml',
+      techTags: ["Python", "Machine Learning", "XGBoost", "SHAP", "Decision Support System", "Credit Scoring"],
+      metrics: [
+        { label: "Detection Accuracy", value: "95", suffix: "%", isPositive: true },
+        { label: "IP Registration", value: "100", suffix: "%", isPositive: true },
+        { label: "Copyright validity", value: "50", suffix: "y", isPositive: true }
+      ]
     }
   ],
   skills: [
