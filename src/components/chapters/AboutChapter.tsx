@@ -160,7 +160,7 @@ export default function AboutChapter() {
               <div className="space-y-4 md:space-y-5 text-primary/80 leading-relaxed text-[14px] md:text-[15px]">
 
                 {/* Web layer paragraph */}
-                <p>
+                <div>
                   For the web layer, I work primarily with <T n="JavaScript" /> for
                   raw flexibility and <T n="TypeScript" /> when team-scale type
                   contracts matter — the compiler as a forcing function for clear
@@ -168,10 +168,10 @@ export default function AboutChapter() {
                   <T n="Node.js" /> paired with <T n="REST API Design" /> defines
                   the boundaries between client and server. Persistence lives
                   in <T n="SQL" />: structured, verifiable, slow to lie.
-                </p>
+                </div>
 
                 {/* Data & intelligence paragraph */}
-                <p>
+                <div>
                   When the problem shifts from web to intelligence,{" "}
                   <T n="Python" /> becomes the language of choice — fast to
                   prototype, serious in production. When interpretability is a
@@ -182,17 +182,17 @@ export default function AboutChapter() {
                   any of this reaches a screen, <T n="Figma" /> serves as the
                   thinking tool — the whiteboard that saves three sprint cycles
                   of UI debate.
-                </p>
+                </div>
 
                 {/* Systems paragraph */}
-                <p>
+                <div>
                   At the system level, <T n="System Architecture" /> is not a
                   deliverable — it is a discipline. Define the boundaries before
                   writing a single line; let structure constrain the chaos. When
                   the problem escapes the browser and lives at the hardware
                   edge, <T n="IoT Integration" /> closes the loop between raw
                   sensor data and software decision.
-                </p>
+                </div>
               </div>
 
               {/* Mobile-only: inline annotation notes for this section */}
