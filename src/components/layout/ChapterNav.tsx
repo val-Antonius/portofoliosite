@@ -21,8 +21,6 @@ const poseMap: Record<string, string> = {
 export default function ChapterNav({ chapters, currentId, onSelect }: ChapterNavProps) {
   return (
     <div className="relative h-24 border-b border-border bg-canvas px-6 md:px-12 flex items-center">
-      {/* Connecting Line */}
-      <div className="absolute top-[40%] left-6 right-6 md:left-12 md:right-12 h-[1px] bg-border -translate-y-1/2 z-0"></div>
 
       {/* Chapters list */}
       <div className="relative z-10 w-full flex justify-between items-center max-w-4xl mx-auto h-full pt-4">

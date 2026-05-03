@@ -9,8 +9,8 @@ interface TopBarProps {
 export default function TopBar({ onTogglePanel }: TopBarProps) {
   return (
     <header className="h-12 border-b border-border bg-canvas/80 backdrop-blur-md px-6 md:px-12 flex items-center justify-between">
-      <div className="font-mono text-xs text-secondary uppercase tracking-widest">Mission Control</div>
-      <button 
+      <div className="font-mono text-xs text-secondary uppercase tracking-widest">Dashboard</div>
+      <button
         onClick={onTogglePanel}
         className="flex items-center gap-2 hover:text-amber transition-colors text-sm font-sans"
       >

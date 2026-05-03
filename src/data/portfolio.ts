@@ -108,6 +108,7 @@ export const portfolioData: PortfolioData = {
         { category: "AI / Analytics", items: ["Ollama LLM", "Data Aggregation"] },
         { category: "Domain", items: ["POS Systems", "Business Intelligence"] },
       ],
+      link: "https://github.com/val-Antonius/whser.git",
       metrics: [
         { label: "Analysis Time", value: "7", suffix: "m", isPrimary: true, isPositive: true },
         { label: "Functional Stability", value: "90", suffix: "%", isPositive: true },
@@ -151,6 +152,7 @@ export const portfolioData: PortfolioData = {
         { category: "Backend", items: ["Database", "API"] },
         { category: "Domain", items: ["Asset Lifecycle", "Audit Logging"] },
       ],
+      link: "https://inventory.dafalabs.net/",
       metrics: [
         { label: "Traceability", value: "100", suffix: "%", isPositive: true },
         { label: "Digitization", value: "100", suffix: "%", isPositive: true },
@@ -229,11 +231,12 @@ export const portfolioData: PortfolioData = {
       category: "ds-ml",
       techTags: ["Python", "Machine Learning", "XGBoost", "SHAP", "Decision Support", "Credit Scoring"],
       techStackCategorized: [
-        { category: "Modeling", items: ["XGBoost", "Scikit-learn"] },
-        { category: "Explainability", items: ["SHAP"] },
-        { category: "Language / Runtime", items: ["Python"] },
-        { category: "Visualization", items: ["Matplotlib", "SHAP Plots"] },
+        { category: "Data / Features", items: ["Pandas", "Scikit-Learn"] },
+        { category: "Modeling", items: ["XGBoost", "Hyperparameter Tuning"] },
+        { category: "Explainability", items: ["SHAP", "Feature Attribution"] },
+        { category: "Deployment", items: ["Streamlit", "Python"] },
       ],
+      link: "https://shap-credit-scoring.streamlit.app/",
       metrics: [
         // TODO: Replace with actual model metrics (accuracy, AUC, etc.)
         { label: "Model Accuracy", value: "95", suffix: "%", isPrimary: true, isPositive: true },

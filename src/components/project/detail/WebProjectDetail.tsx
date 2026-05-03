@@ -47,23 +47,31 @@ export default function WebProjectDetail({ project }: WebProjectDetailProps) {
             tagline={project.tagline ?? project.description}
             summary={project.description}
             type={project.type}
+            link={project.link}
           />
         </div>
 
         {/* Metric cards stacked */}
-        <div className="md:col-span-2 flex flex-col gap-4">
-          {project.metrics.map((metric, i) => (
-            <motion.div variants={item} key={i} className="flex-1">
-              <MetricCard
-                label={metric.label}
-                value={Number(metric.value)}
-                prefix={metric.prefix}
-                suffix={metric.suffix}
-                isPositive={metric.isPositive}
-                className="h-full"
-              />
-            </motion.div>
-          ))}
+        <div className="md:col-span-2 flex flex-col gap-3">
+          <span
+            className="text-[10px] font-mono uppercase tracking-widest"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            Key Metrics
+          </span>
+          <div className="grid grid-cols-1 gap-2">
+            {project.metrics.map((metric, i) => (
+              <motion.div variants={item} key={i}>
+                <MetricCard
+                  label={metric.label}
+                  value={Number(metric.value)}
+                  prefix={metric.prefix}
+                  suffix={metric.suffix}
+                  isPositive={metric.isPositive}
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
 

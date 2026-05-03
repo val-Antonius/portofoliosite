@@ -46,6 +46,8 @@ export interface Project {
   mockupFrame?: 'desktop' | 'mobile';
   /** Tech stack grouped by category — used in CompetencyBadges */
   techStackCategorized?: TechCategory[];
+  /** Optional link to the live project or repository */
+  link?: string;
   /** DS/ML only — pipeline steps for the ML Pipeline diagram */
   pipelineSteps?: PipelineStep[];
 }

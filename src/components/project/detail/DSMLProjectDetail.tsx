@@ -21,45 +21,7 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 };
 
-// ── Compact metric row for DS/ML (inline, not tall cards) ─────────────────
-function CompactMetric({
-  label,
-  value,
-  prefix = "",
-  suffix = "",
-  isPositive = true,
-}: {
-  label: string;
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  isPositive?: boolean;
-}) {
-  const { count, ref } = useCountUp(value, 1200);
-  return (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className="flex flex-col gap-1 p-3 rounded-lg"
-      style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
-    >
-      <span
-        className="text-[9px] font-mono uppercase tracking-widest"
-        style={{ color: "var(--text-secondary)" }}
-      >
-        {label}
-      </span>
-      <span
-        className="font-mono text-2xl font-bold leading-none"
-        style={{ color: isPositive ? "var(--accent-green)" : "var(--accent-red)" }}
-      >
-        {prefix}
-        {count}
-        {suffix}
-      </span>
-    </div>
-  );
-}
-
+import MetricCard from "../../ui/MetricCard";
 /**
  * Layout B — Data Science / ML lab report style.
  *
@@ -85,6 +47,7 @@ export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
             tagline={project.tagline ?? project.description}
             summary={project.problem ?? project.description}
             type={project.type}
+            link={project.link}
           />
         </div>
 
@@ -98,7 +61,7 @@ export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
           </span>
           <div className="grid grid-cols-1 gap-2">
             {project.metrics.map((metric, i) => (
-              <CompactMetric
+              <MetricCard
                 key={i}
                 label={metric.label}
                 value={Number(metric.value)}

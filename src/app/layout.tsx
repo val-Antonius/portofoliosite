@@ -20,7 +20,7 @@ const sansFont = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Antonius Valentino | Mission Control",
+  title: "Antonius Valentino | Dashboard",
   description: "Personal portfolio of Antonius Valentino - Information Systems Engineer",
 };
 

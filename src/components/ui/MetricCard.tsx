@@ -15,15 +15,25 @@ export default function MetricCard({ label, value, prefix = "", suffix = "", isP
   const { count, ref } = useCountUp(value, 1200);
 
   return (
-    <div className={`panel flex flex-col justify-between h-full ${className}`}>
-      <span className="text-[11px] font-sans uppercase tracking-widest text-[#6B6560]">{label}</span>
-      <div 
-        ref={ref}
-        className="font-mono text-4xl md:text-5xl font-bold mt-4"
-        style={{ color: isPositive ? "var(--accent-green)" : "var(--accent-amber)" }}
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`flex flex-col gap-1 p-3 rounded-lg ${className}`}
+      style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
+    >
+      <span
+        className="text-[9px] font-mono uppercase tracking-widest"
+        style={{ color: "var(--text-secondary)" }}
       >
-        {prefix}{count}{suffix}
-      </div>
+        {label}
+      </span>
+      <span
+        className="font-mono text-2xl font-bold leading-none"
+        style={{ color: isPositive ? "var(--accent-green)" : "var(--accent-red)" }}
+      >
+        {prefix}
+        {count}
+        {suffix}
+      </span>
     </div>
   );
 }
