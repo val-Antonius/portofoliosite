@@ -71,6 +71,7 @@ export default function WebProjectDetail({ project }: WebProjectDetailProps) {
       <MockupGallery
         images={project.mockupImages ?? []}
         projectTitle={project.title}
+        frameType={project.mockupFrame ?? "desktop"}
       />
 
       {/* ── 3. Rationale Grid ────────────────────────────────────────────── */}

@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Project } from "../../../types";
-import MetricCard from "../../ui/MetricCard";
 import DarkSummaryBox from "./DarkSummaryBox";
 import MLPipeline from "./MLPipeline";
 import CompetencyBadges from "./CompetencyBadges";
+import { useCountUp } from "../../../hooks/useCountUp";
 
 interface DSMLProjectDetailProps {
   project: Project;
@@ -21,14 +21,53 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 };
 
+// ── Compact metric row for DS/ML (inline, not tall cards) ─────────────────
+function CompactMetric({
+  label,
+  value,
+  prefix = "",
+  suffix = "",
+  isPositive = true,
+}: {
+  label: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  isPositive?: boolean;
+}) {
+  const { count, ref } = useCountUp(value, 1200);
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className="flex flex-col gap-1 p-3 rounded-lg"
+      style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
+    >
+      <span
+        className="text-[9px] font-mono uppercase tracking-widest"
+        style={{ color: "var(--text-secondary)" }}
+      >
+        {label}
+      </span>
+      <span
+        className="font-mono text-2xl font-bold leading-none"
+        style={{ color: isPositive ? "var(--accent-green)" : "var(--accent-red)" }}
+      >
+        {prefix}
+        {count}
+        {suffix}
+      </span>
+    </div>
+  );
+}
+
 /**
  * Layout B — Data Science / ML lab report style.
  *
  * Sections (top → bottom):
- *   1. Abstract Box (dark) + Key Results (metric cards)  [two-column]
- *   2. ML Pipeline Diagram
- *   3. Technical Findings (impact bullets as "findings")
- *   4. Tech Stack by layer (Competency Badges)
+ *   1. Abstract Box (dark) + compact Key Results panel  [two-column, height-matched]
+ *   2. ML Pipeline Diagram  [full-width, visual flow]
+ *   3. Methodology narrative card
+ *   4. Findings (impact bullets) + Competency Badges  [two-column]
  */
 export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
   return (
@@ -38,8 +77,8 @@ export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
       animate="show"
       className="flex flex-col gap-10"
     >
-      {/* ── 1. Abstract + Key Results ─────────────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
+      {/* ── 1. Abstract + Key Results ──────────────────────────────────────── */}
+      <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-5 gap-5 items-start">
         {/* Abstract (wider) */}
         <div className="md:col-span-3">
           <DarkSummaryBox
@@ -49,62 +88,63 @@ export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
           />
         </div>
 
-        {/* Key Results — metric cards */}
-        <div className="md:col-span-2 flex flex-col gap-2">
+        {/* Key Results — compact metric tiles, not full-height cards */}
+        <div className="md:col-span-2 flex flex-col gap-3">
           <span
-            className="text-[10px] font-mono uppercase tracking-widest mb-2"
+            className="text-[10px] font-mono uppercase tracking-widest"
             style={{ color: "var(--text-secondary)" }}
           >
             Key Results
           </span>
-          <div className="flex flex-col gap-3 flex-1">
+          <div className="grid grid-cols-1 gap-2">
             {project.metrics.map((metric, i) => (
-              <motion.div variants={item} key={i} className="flex-1">
-                <MetricCard
-                  label={metric.label}
-                  value={Number(metric.value)}
-                  prefix={metric.prefix}
-                  suffix={metric.suffix}
-                  isPositive={metric.isPositive}
-                  className="h-full"
-                />
-              </motion.div>
+              <CompactMetric
+                key={i}
+                label={metric.label}
+                value={Number(metric.value)}
+                prefix={metric.prefix}
+                suffix={metric.suffix}
+                isPositive={metric.isPositive}
+              />
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* ── 2. ML Pipeline Diagram ───────────────────────────────────────── */}
+      {/* ── 2. ML Pipeline Diagram ─────────────────────────────────────────── */}
       {project.pipelineSteps && project.pipelineSteps.length > 0 && (
         <MLPipeline steps={project.pipelineSteps} />
       )}
 
-      {/* ── 3. Approach Narrative ────────────────────────────────────────── */}
+      {/* ── 3. Methodology Narrative ───────────────────────────────────────── */}
       {project.approach && (
         <motion.div
           variants={item}
-          className="rounded-lg p-6"
+          className="rounded-lg p-5 flex flex-col gap-3"
           style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
         >
-          <span
-            className="block text-[10px] font-mono uppercase tracking-widest mb-3"
-            style={{ color: "var(--accent-amber)" }}
-          >
-            Methodology
-          </span>
+          <div className="flex items-center gap-3">
+            <span
+              className="text-[10px] font-mono uppercase tracking-widest"
+              style={{ color: "var(--accent-amber)" }}
+            >
+              Methodology
+            </span>
+            <div className="flex-1 h-px" style={{ background: "var(--border)" }} />
+          </div>
           <p className="text-sm leading-relaxed" style={{ color: "var(--text-primary)" }}>
             {project.approach}
           </p>
         </motion.div>
       )}
 
-      {/* ── 4. Findings + Tech Stack ─────────────────────────────────────── */}
+      {/* ── 4. Findings + Tech Stack ───────────────────────────────────────── */}
       <motion.div
         variants={item}
         className="grid grid-cols-1 md:grid-cols-5 gap-8 pt-6"
         style={{ borderTop: "1px solid var(--border)" }}
       >
-        {/* Findings (impact bullets) */}
+        {/* Findings */}
         <div className="md:col-span-3 flex flex-col gap-4">
           <span
             className="text-[10px] font-mono uppercase tracking-widest"
@@ -129,7 +169,7 @@ export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
           </ul>
         </div>
 
-        {/* Tech stack by layer */}
+        {/* Tech stack */}
         {project.techStackCategorized && project.techStackCategorized.length > 0 && (
           <div className="md:col-span-2">
             <CompetencyBadges techStackCategorized={project.techStackCategorized} />

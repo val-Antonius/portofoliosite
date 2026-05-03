@@ -151,6 +151,7 @@ export const portfolioData: PortfolioData = {
         "/pic/mockup_sikumelawit/log.png",
         "/pic/mockup_sikumelawit/loading.png",
       ],
+      mockupFrame: "mobile",
     },
 
     // ─────────────────────────────────────────────────────────────────────────

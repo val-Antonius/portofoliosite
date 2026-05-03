@@ -42,6 +42,8 @@ export interface Project {
   outcome?: string;
   /** Ordered list of app screenshot paths relative to /public (e.g. "/pic/mockup_metavision/dashboard.png") */
   mockupImages?: string[];
+  /** Frame style for the mockup gallery. 'desktop' = browser chrome (16:9). 'mobile' = phone frame (9:19.5). Defaults to 'desktop'. */
+  mockupFrame?: 'desktop' | 'mobile';
   /** Tech stack grouped by category — used in CompetencyBadges */
   techStackCategorized?: TechCategory[];
   /** DS/ML only — pipeline steps for the ML Pipeline diagram */
