@@ -124,3 +124,12 @@ body::before {
 .backface-hidden {
   backface-visibility: hidden;
 }
+
+/* Hide scrollbar utility */
+.hidden-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}

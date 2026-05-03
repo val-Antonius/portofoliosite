@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePortfolioContext } from "@/context/PortfolioContext";
 import ChapterNav from "@/components/layout/ChapterNav";
@@ -25,6 +25,18 @@ export default function PortfolioApp() {
   const [loading, setLoading] = useState(true);
   const [panelOpen, setPanelOpen] = useState(false);
   const { currentChapter, chapters, setChapter } = usePortfolioContext();
+
+  // Prevent body scroll when panel is open to avoid double scrollbars
+  useEffect(() => {
+    if (panelOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [panelOpen]);
 
   const ActiveComponent = chapterComponents[currentChapter.id] || OverviewChapter;
 

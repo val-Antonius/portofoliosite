@@ -2,40 +2,40 @@ import { PortfolioData } from "../types";
 
 export const portfolioData: PortfolioData = {
   chapters: [
-    { 
-      id: "overview", 
-      keyword: "building", 
-      icon: "layout-dashboard", 
+    {
+      id: "overview",
+      keyword: "building",
+      icon: "layout-dashboard",
       subtitle: "Mission Control",
       headingFormula: {
         question: "Is there someone who can actually build this?",
         answer: "There is. **Open now.**"
       }
     },
-    { 
-      id: "work", 
-      keyword: "delivering", 
-      icon: "briefcase", 
+    {
+      id: "work",
+      keyword: "delivering",
+      icon: "briefcase",
       subtitle: "Selected Projects",
       headingFormula: {
         question: "Can I see what you've actually shipped?",
         answer: "Five. **All in production.**"
       }
     },
-    { 
-      id: "about", 
-      keyword: "systematic", 
-      icon: "user", 
+    {
+      id: "about",
+      keyword: "systematic",
+      icon: "user",
       subtitle: "Field Notes",
       headingFormula: {
         question: "How do you think about systems?",
         answer: "Constraints **first.**"
       }
     },
-    { 
-      id: "contact", 
-      keyword: "reachable", 
-      icon: "mail", 
+    {
+      id: "contact",
+      keyword: "reachable",
+      icon: "mail",
       subtitle: "Communications",
       headingFormula: {
         question: "Is it worth reaching out?",
@@ -114,7 +114,21 @@ export const portfolioData: PortfolioData = {
         { label: "UAT Score", value: "88.9", suffix: "%", isPositive: true },
       ],
       // TODO: Replace with actual screenshots when available
-      mockupImages: [],
+      mockupImages: [
+        "/pic/mockup_whser/role.png",
+        "/pic/mockup_whser/admin_dashboard.png",
+        "/pic/mockup_whser/admin_createorder.png",
+        "/pic/mockup_whser/admin_orderdetail.png",
+        "/pic/mockup_whser/admin_cancelorder.png",
+        "/pic/mockup_whser/admin_payment.png",
+        "/pic/mockup_whser/admin_inventory.png",
+        "/pic/mockup_whser/owner_dashboard.png",
+        "/pic/mockup_whser/owner_insight.png",
+        "/pic/mockup_whser/owner_recommendation.png",
+        "/pic/mockup_whser/owner_snapshots.png",
+        "/pic/mockup_whser/owner_tasks.png",
+
+      ],
     },
     {
       id: "disa",
