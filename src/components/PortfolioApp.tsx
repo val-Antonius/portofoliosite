@@ -10,14 +10,12 @@ import LoadingScreen from "@/components/layout/LoadingScreen";
 
 import OverviewChapter from "@/components/chapters/OverviewChapter";
 import WorkChapter from "@/components/chapters/WorkChapter";
-import SkillsChapter from "@/components/chapters/SkillsChapter";
 import AboutChapter from "@/components/chapters/AboutChapter";
 import ContactChapter from "@/components/chapters/ContactChapter";
 
 const chapterComponents: Record<string, React.FC> = {
   overview: OverviewChapter,
   work: WorkChapter,
-  skills: SkillsChapter,
   about: AboutChapter,
   contact: ContactChapter,
 };

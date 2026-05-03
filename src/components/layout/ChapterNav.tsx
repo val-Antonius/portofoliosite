@@ -14,7 +14,7 @@ const poseMap: Record<string, string> = {
   overview: "/svg/profiles.svg",
   work: "/svg/desk.svg",
   skills: "/svg/thinking.svg",
-  about: "/svg/welcome.svg",
+  about: "/svg/thinking.svg",
   contact: "/svg/welcome.svg",
 };
 

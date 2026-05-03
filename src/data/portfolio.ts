@@ -4,8 +4,7 @@ export const portfolioData: PortfolioData = {
   chapters: [
     { id: "overview", keyword: "building", icon: "layout-dashboard", subtitle: "Mission Control" },
     { id: "work", keyword: "delivering", icon: "briefcase", subtitle: "Selected Projects" },
-    { id: "skills", keyword: "analytical", icon: "radar", subtitle: "Technical Expertise" },
-    { id: "about", keyword: "systematic", icon: "user", subtitle: "Methodology" },
+    { id: "about", keyword: "systematic", icon: "user", subtitle: "Field Notes" },
     { id: "contact", keyword: "reachable", icon: "mail", subtitle: "Communications" },
   ],
   projects: [
@@ -107,8 +106,15 @@ export const portfolioData: PortfolioData = {
         { label: "Digitization", value: "100", suffix: "%", isPositive: true },
         { label: "Efficiency Gain", value: "80", suffix: "%", isPositive: true },
       ],
-      // TODO: Replace with actual screenshots when available
-      mockupImages: [],
+      mockupImages: [
+        "/pic/mockup_disa/dashboard.png",
+        "/pic/mockup_disa/aset_regist.png",
+        "/pic/mockup_disa/aset_detail.png",
+        "/pic/mockup_disa/borrow_return_flow.png",
+        "/pic/mockup_disa/overdue_manage.png",
+        "/pic/mockup_disa/analytics.png",
+        "/pic/mockup_disa/log_act.png",
+      ],
     },
     {
       id: "sikumelawit",
@@ -193,16 +199,24 @@ export const portfolioData: PortfolioData = {
     },
   ],
   skills: [
+    // Programming
     { name: "JavaScript", category: "Programming", proficiency: 95 },
     { name: "TypeScript", category: "Programming", proficiency: 90 },
-    { name: "PHP", category: "Programming", proficiency: 85 },
     { name: "Python", category: "Programming", proficiency: 80 },
+    // Frontend
+    { name: "React", category: "Frontend", proficiency: 88 },
+    // Backend
+    { name: "Node.js", category: "Backend", proficiency: 82 },
+    { name: "REST API Design", category: "Backend", proficiency: 85 },
+    // Data & Analytics
     { name: "SQL", category: "Data & Analytics", proficiency: 90 },
-    { name: "Tableau", category: "Data & Analytics", proficiency: 85 },
-    { name: "RapidMiner", category: "Data & Analytics", proficiency: 85 },
-    { name: "Pentaho", category: "Data & Analytics", proficiency: 80 },
+    { name: "Machine Learning", category: "Data & Analytics", proficiency: 78 },
+    { name: "XGBoost / SHAP", category: "Data & Analytics", proficiency: 75 },
+    // Engineering
+    { name: "System Architecture", category: "Engineering", proficiency: 85 },
+    { name: "IoT Integration", category: "Engineering", proficiency: 72 },
+    // Design
     { name: "Figma", category: "UI/UX", proficiency: 90 },
-    { name: "COBIT", category: "Governance", proficiency: 80 },
   ],
   experience: [
     {
