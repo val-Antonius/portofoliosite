@@ -12,6 +12,7 @@ import OverviewChapter from "@/components/chapters/OverviewChapter";
 import WorkChapter from "@/components/chapters/WorkChapter";
 import AboutChapter from "@/components/chapters/AboutChapter";
 import ContactChapter from "@/components/chapters/ContactChapter";
+import HeadingFormula from "@/components/HeadingFormula";
 
 const chapterComponents: Record<string, React.FC> = {
   overview: OverviewChapter,
@@ -52,12 +53,7 @@ export default function PortfolioApp() {
               className="h-full"
             >
               {/* Heading Formula */}
-              <div className="px-6 py-8 md:px-12 md:py-12">
-                <h1 className="font-display tracking-tight" style={{ fontSize: "clamp(36px, 5vw, 56px)" }}>
-                  <span className="font-light text-primary">Antonius is </span>
-                  <span className="font-bold text-amber">{currentChapter.keyword}.</span>
-                </h1>
-              </div>
+              <HeadingFormula chapter={currentChapter} />
               
               <ActiveComponent />
             </motion.div>

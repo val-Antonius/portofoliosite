@@ -69,6 +69,17 @@ export interface Chapter {
   keyword: string;
   icon: string;
   subtitle: string;
+  headingFormula: {
+    question: string;
+    answer: string;
+  };
+}
+
+export interface ContactInfo {
+  email: string;
+  github: string;
+  linkedin: string;
+  location: string;
 }
 
 export interface PortfolioData {
@@ -76,4 +87,5 @@ export interface PortfolioData {
   skills: Skill[];
   experience: Experience[];
   chapters: Chapter[];
+  contact: ContactInfo;
 }

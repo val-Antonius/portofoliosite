@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
+import { portfolioData } from "@/data/portfolio";
 
 const GithubIcon = ({ size = 24, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -19,6 +20,8 @@ const LinkedinIcon = ({ size = 24, className = "" }) => (
 );
 
 export default function ContactChapter() {
+  const { contact } = portfolioData;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -26,40 +29,42 @@ export default function ContactChapter() {
       className="px-6 md:px-12 h-full flex flex-col items-center justify-center pt-0 space-y-12 pb-24"
     >
        <div className="text-center max-w-2xl mx-auto space-y-6">
-         <h2 className="text-3xl md:text-5xl font-display text-primary leading-tight">
-           Let's build scalable systems together.
-         </h2>
+
          <p className="text-primary/70 text-lg leading-relaxed">
            Open for new opportunities and interesting technical challenges. If you need a reliable engine for your product, let's talk.
          </p>
        </div>
 
-       <div className="flex flex-col md:flex-row gap-6 w-full max-w-3xl cursor-pointer">
-         <a href="mailto:hello@example.com" className="panel group flex-1 flex flex-col items-center justify-center gap-4 hover:border-amber transition-colors min-h-[200px]">
-           <div className="w-12 h-12 rounded-full bg-amber-bg flex items-center justify-center text-amber group-hover:scale-110 transition-transform">
-             <Mail size={20} />
+       <div className="panel w-full max-w-xl flex flex-col items-center p-8 space-y-8">
+         {/* Email Section */}
+         <a href={`mailto:${contact.email}`} className="group flex flex-col items-center justify-center gap-4 hover:text-amber transition-colors w-full">
+           <div className="w-16 h-16 rounded-full bg-amber-bg flex items-center justify-center text-amber group-hover:scale-110 transition-transform">
+             <Mail size={24} />
            </div>
-           <div className="text-sm font-mono text-secondary">hello@example.com</div>
+           <div className="text-lg font-mono text-secondary group-hover:text-amber transition-colors">
+             {contact.email}
+           </div>
          </a>
 
-         <div className="panel flex-1 flex flex-col items-center justify-between min-h-[200px]">
-           <div className="w-full">
-             <div className="text-[11px] uppercase tracking-widest text-secondary mb-4 text-center">Elsewhere</div>
-             <div className="flex flex-col gap-3 w-full">
-               <a href="#" className="flex items-center gap-3 w-full px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
-                 <LinkedinIcon size={16} />
-                 <span className="text-sm font-medium">LinkedIn</span>
-               </a>
-               <a href="#" className="flex items-center gap-3 w-full px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
-                 <GithubIcon size={16} />
-                 <span className="text-sm font-medium">GitHub</span>
-               </a>
-             </div>
-           </div>
-           <div className="flex items-center gap-2 mt-6 text-xs text-secondary font-mono bg-canvas px-3 py-1.5 rounded-full border border-border">
-             <MapPin size={12} />
-             Jakarta, Indonesia
-           </div>
+         {/* Divider */}
+         <div className="w-full h-px bg-border"></div>
+
+         {/* Social Links Section */}
+         <div className="w-full flex flex-col sm:flex-row gap-4">
+           <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
+             <LinkedinIcon size={18} />
+             <span className="text-sm font-medium">LinkedIn</span>
+           </a>
+           <a href={contact.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
+             <GithubIcon size={18} />
+             <span className="text-sm font-medium">GitHub</span>
+           </a>
+         </div>
+
+         {/* Location */}
+         <div className="flex items-center gap-2 pt-2 text-xs text-secondary font-mono">
+           <MapPin size={14} />
+           {contact.location}
          </div>
        </div>
     </motion.div>

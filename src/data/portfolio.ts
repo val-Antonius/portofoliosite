@@ -2,10 +2,46 @@ import { PortfolioData } from "../types";
 
 export const portfolioData: PortfolioData = {
   chapters: [
-    { id: "overview", keyword: "building", icon: "layout-dashboard", subtitle: "Mission Control" },
-    { id: "work", keyword: "delivering", icon: "briefcase", subtitle: "Selected Projects" },
-    { id: "about", keyword: "systematic", icon: "user", subtitle: "Field Notes" },
-    { id: "contact", keyword: "reachable", icon: "mail", subtitle: "Communications" },
+    { 
+      id: "overview", 
+      keyword: "building", 
+      icon: "layout-dashboard", 
+      subtitle: "Mission Control",
+      headingFormula: {
+        question: "Is there someone who can actually build this?",
+        answer: "There is. **Open now.**"
+      }
+    },
+    { 
+      id: "work", 
+      keyword: "delivering", 
+      icon: "briefcase", 
+      subtitle: "Selected Projects",
+      headingFormula: {
+        question: "Can I see what you've actually shipped?",
+        answer: "Five. **All in production.**"
+      }
+    },
+    { 
+      id: "about", 
+      keyword: "systematic", 
+      icon: "user", 
+      subtitle: "Field Notes",
+      headingFormula: {
+        question: "How do you think about systems?",
+        answer: "Constraints **first.**"
+      }
+    },
+    { 
+      id: "contact", 
+      keyword: "reachable", 
+      icon: "mail", 
+      subtitle: "Communications",
+      headingFormula: {
+        question: "Is it worth reaching out?",
+        answer: "If it's a **real** problem — always."
+      }
+    },
   ],
   projects: [
     // ─────────────────────────────────────────────────────────────────────────
@@ -232,4 +268,10 @@ export const portfolioData: PortfolioData = {
       ],
     },
   ],
+  contact: {
+    email: "thonybo6661@gmail.com",
+    github: "https://github.com/val-Antonius",
+    linkedin: "https://www.linkedin.com/in/antonius-valentino",
+    location: "Jakarta, Indonesia",
+  },
 };
