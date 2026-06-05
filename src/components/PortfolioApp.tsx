@@ -12,7 +12,6 @@ import OverviewChapter from "@/components/chapters/OverviewChapter";
 import WorkChapter from "@/components/chapters/WorkChapter";
 import AboutChapter from "@/components/chapters/AboutChapter";
 import ContactChapter from "@/components/chapters/ContactChapter";
-import HeadingFormula from "@/components/HeadingFormula";
 
 const chapterComponents: Record<string, React.FC> = {
   overview: OverviewChapter,
@@ -64,9 +63,6 @@ export default function PortfolioApp() {
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="h-full"
             >
-              {/* Heading Formula */}
-              <HeadingFormula chapter={currentChapter} />
-              
               <ActiveComponent />
             </motion.div>
           </AnimatePresence>

@@ -3,7 +3,11 @@
 import { usePortfolioContext } from "../../context/PortfolioContext";
 import { ArrowRight, MapPin, Clock, Briefcase } from "lucide-react";
 
-export default function HealthStatusCard() {
+interface HealthStatusCardProps {
+  showContactButton?: boolean;
+}
+
+export default function HealthStatusCard({ showContactButton = true }: HealthStatusCardProps) {
   const { setChapter } = usePortfolioContext();
 
   return (
@@ -59,13 +63,15 @@ export default function HealthStatusCard() {
         </div>
       </div>
 
-      <button 
-        onClick={() => setChapter("contact")}
-        className="relative z-10 flex items-center justify-between w-full p-3 rounded bg-canvas border border-border hover:border-amber hover:text-amber text-primary transition-all group/btn cursor-pointer"
-      >
-        <span className="text-xs font-mono uppercase tracking-widest font-semibold">Initiate Contact</span>
-        <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-      </button>
+      {showContactButton && (
+        <button 
+          onClick={() => setChapter("contact")}
+          className="relative z-10 flex items-center justify-between w-full p-3 rounded bg-canvas border border-border hover:border-amber hover:text-amber text-primary transition-all group/btn cursor-pointer"
+        >
+          <span className="text-xs font-mono uppercase tracking-widest font-semibold">Initiate Contact</span>
+          <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+        </button>
+      )}
     </div>
   );
 }

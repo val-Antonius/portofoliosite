@@ -22,7 +22,7 @@ export default function SkillsChapter() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="px-6 md:px-12 pb-12 h-full flex flex-col pt-0 overflow-y-auto hidden-scrollbar"
+      className="px-6 md:px-12 pb-12 h-full flex flex-col pt-8 md:pt-12 overflow-y-auto hidden-scrollbar"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
         <motion.div variants={itemAnim} className="panel h-full flex flex-col min-h-[400px]">

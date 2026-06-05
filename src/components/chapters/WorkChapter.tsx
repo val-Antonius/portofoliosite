@@ -37,7 +37,7 @@ export default function WorkChapter() {
   });
 
   return (
-    <div className="h-full relative overflow-hidden flex flex-col items-stretch">
+    <div className="h-full relative overflow-hidden flex flex-col items-stretch pt-8 md:pt-12">
        <AnimatePresence mode="wait">
         {!selectedProject ? (
           <motion.div

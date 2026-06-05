@@ -76,7 +76,7 @@ const fadeUp = {
 
 export default function AboutChapter() {
   return (
-    <div className="px-4 md:px-12 pb-16 md:pb-28">
+    <div className="px-4 md:px-12 pt-8 md:pt-12 pb-16 md:pb-28">
       <motion.div
         variants={stagger}
         initial="hidden"

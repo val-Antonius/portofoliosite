@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
+import HealthStatusCard from "../ui/HealthStatusCard";
 
 const GithubIcon = ({ size = 24, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -26,47 +27,58 @@ export default function ContactChapter() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="px-6 md:px-12 h-full flex flex-col items-center justify-center pt-0 space-y-12 pb-24"
+      className="px-6 md:px-12 h-full flex flex-col items-center justify-center pt-8 md:pt-12 space-y-8 pb-24 overflow-y-auto hidden-scrollbar"
     >
-       <div className="text-center max-w-2xl mx-auto space-y-6">
+      <div className="text-center max-w-2xl mx-auto space-y-6 shrink-0 mt-8">
+        <p className="text-primary/70 text-lg leading-relaxed">
+          Open for new opportunities and interesting technical challenges. If you need a reliable engine for your product, let's talk.
+        </p>
+      </div>
 
-         <p className="text-primary/70 text-lg leading-relaxed">
-           Open for new opportunities and interesting technical challenges. If you need a reliable engine for your product, let's talk.
-         </p>
-       </div>
+      <div className="flex flex-col md:flex-row gap-8 items-stretch w-full max-w-4xl justify-center">
+        {/* Left Side: System Health Status */}
+        <div className="flex-1 max-w-md w-full">
+          <HealthStatusCard showContactButton={false} />
+        </div>
 
-       <div className="panel w-full max-w-xl flex flex-col items-center p-8 space-y-8">
-         {/* Email Section */}
-         <a href={`mailto:${contact.email}`} className="group flex flex-col items-center justify-center gap-4 hover:text-amber transition-colors w-full">
-           <div className="w-16 h-16 rounded-full bg-amber-bg flex items-center justify-center text-amber group-hover:scale-110 transition-transform">
-             <Mail size={24} />
-           </div>
-           <div className="text-lg font-mono text-secondary group-hover:text-amber transition-colors">
-             {contact.email}
-           </div>
-         </a>
+        {/* Right Side: Contact panel */}
+        <div className="flex-1 max-w-md w-full panel flex flex-col items-center justify-between p-8 space-y-8">
+          <div className="w-full flex-1 flex flex-col justify-center items-center space-y-6">
+            {/* Email Section */}
+            <a href={`mailto:${contact.email}`} className="group flex flex-col items-center justify-center gap-4 hover:text-amber transition-colors w-full">
+              <div className="w-16 h-16 rounded-full bg-amber-bg flex items-center justify-center text-amber group-hover:scale-110 transition-transform">
+                <Mail size={24} />
+              </div>
+              <div className="text-lg font-mono text-secondary group-hover:text-amber transition-colors text-center break-all">
+                {contact.email}
+              </div>
+            </a>
+          </div>
 
-         {/* Divider */}
-         <div className="w-full h-px bg-border"></div>
+          <div className="w-full space-y-6">
+            {/* Divider */}
+            <div className="w-full h-px bg-border"></div>
 
-         {/* Social Links Section */}
-         <div className="w-full flex flex-col sm:flex-row gap-4">
-           <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
-             <LinkedinIcon size={18} />
-             <span className="text-sm font-medium">LinkedIn</span>
-           </a>
-           <a href={contact.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
-             <GithubIcon size={18} />
-             <span className="text-sm font-medium">GitHub</span>
-           </a>
-         </div>
+            {/* Social Links Section */}
+            <div className="w-full flex flex-col sm:flex-row gap-4">
+              <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
+                <LinkedinIcon size={18} />
+                <span className="text-sm font-medium">LinkedIn</span>
+              </a>
+              <a href={contact.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
+                <GithubIcon size={18} />
+                <span className="text-sm font-medium">GitHub</span>
+              </a>
+            </div>
 
-         {/* Location */}
-         <div className="flex items-center gap-2 pt-2 text-xs text-secondary font-mono">
-           <MapPin size={14} />
-           {contact.location}
-         </div>
-       </div>
+            {/* Location */}
+            <div className="flex items-center justify-center gap-2 pt-2 text-xs text-secondary font-mono">
+              <MapPin size={14} />
+              {contact.location}
+            </div>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }

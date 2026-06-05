@@ -31,41 +31,39 @@
 } */
 
 /* ═══════════════════════════════════════
-   HELIOTROPE DARK
-   Inspired by: sunflower seed core
-   Black void + pollen gold + mahogany stem
+   COOL OPERATOR
    ═══════════════════════════════════════ */
 
 :root {
   /* backgrounds */
-  --bg-canvas: #0E0B00;
-  /* pitch black, yellow undertone */
-  --bg-card: #161200;
-  /* card surface, slightly lifted */
+  --bg-canvas: #F0F4F5;
+  /* arctic white, clinical cool */
+  --bg-card: #FFFFFF;
+  /* pure card surface */
 
   /* borders */
-  --border: #2A2200;
-  /* dark amber border */
+  --border: #C8D4D8;
+  /* cool blue-gray border */
 
   /* typography */
-  --text-primary: #F0E8C8;
-  /* warm off-white, aged parchment */
-  --text-secondary: #6B5E30;
-  /* muted gold, dried pollen */
+  --text-primary: #0A0F10;
+  /* near-black, cold undertone */
+  --text-secondary: #607880;
+  /* steel blue-gray */
 
   /* accents */
-  --accent-amber: #F5C400;
-  /* pollen gold — primary accent */
-  --accent-green: #4A7C00;
-  /* leaf green — success / online */
-  --accent-red: #8B3A00;
-  /* mahogany stem — danger / alert */
-  --accent-amber-bg: #1A1500;
+  --accent-amber: #00B4D8;
+  /* surgical cyan — primary accent */
+  --accent-green: #16A34A;
+  /* clean green — success / online */
+  --accent-red: #FF2D55;
+  /* red alert — danger / alert */
+  --accent-amber-bg: #E0F7FC;
   /* accent surface — badge bg etc */
 
   /* grid overlay */
-  --grid-line: #1A1600;
-  /* barely-there grid on canvas */
+  --grid-line: #D8E4E8;
+  /* cool grid on arctic canvas */
 }
 
 @theme inline {
@@ -127,9 +125,13 @@ body::before {
 
 /* Hide scrollbar utility */
 .hidden-scrollbar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
 }
+
 .hidden-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
+  /* Chrome, Safari and Opera */
 }
