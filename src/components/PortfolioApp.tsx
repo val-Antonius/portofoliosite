@@ -1,11 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePortfolioContext } from "@/context/PortfolioContext";
-import ChapterNav from "@/components/layout/ChapterNav";
 import TopBar from "@/components/layout/TopBar";
-import CVSidePanel from "@/components/layout/CVSidePanel";
 import LoadingScreen from "@/components/layout/LoadingScreen";
 
 import OverviewChapter from "@/components/chapters/OverviewChapter";
@@ -22,20 +20,7 @@ const chapterComponents: Record<string, React.FC> = {
 
 export default function PortfolioApp() {
   const [loading, setLoading] = useState(true);
-  const [panelOpen, setPanelOpen] = useState(false);
-  const { currentChapter, chapters, setChapter } = usePortfolioContext();
-
-  // Prevent body scroll when panel is open to avoid double scrollbars
-  useEffect(() => {
-    if (panelOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [panelOpen]);
+  const { currentChapter } = usePortfolioContext();
 
   const ActiveComponent = chapterComponents[currentChapter.id] || OverviewChapter;
 
@@ -48,8 +33,7 @@ export default function PortfolioApp() {
       <div className="relative min-h-screen flex flex-col w-full overflow-hidden">
         {/* Navigation & Header Layer */}
         <div className="relative z-40 bg-canvas">
-          <TopBar onTogglePanel={() => setPanelOpen(!panelOpen)} />
-          <ChapterNav chapters={chapters} currentId={currentChapter.id} onSelect={setChapter} />
+          <TopBar />
         </div>
 
         {/* Content Layer */}
@@ -67,9 +51,6 @@ export default function PortfolioApp() {
             </motion.div>
           </AnimatePresence>
         </main>
-
-        {/* CV Sidebar Panel Layer */}
-        <CVSidePanel isOpen={panelOpen} onClose={() => setPanelOpen(false)} />
       </div>
     </>
   );

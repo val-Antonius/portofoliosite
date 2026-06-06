@@ -11,22 +11,21 @@ interface OverviewProjectListProps {
 }
 
 export default function OverviewProjectList({ projects, onExplore }: OverviewProjectListProps) {
-  // Default first project as expanded
-  const [hoveredId, setHoveredId] = useState<string | null>(projects[0]?.id || null);
+  // All projects are collapsed by default
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   return (
     <div className="flex flex-col w-full border-t border-border">
       {projects.map((project) => {
-        const isExpanded = hoveredId === project.id;
+        const isExpanded = expandedId === project.id;
 
         return (
           <div
             key={project.id}
-            onMouseEnter={() => setHoveredId(project.id)}
             className="border-b border-border py-4 transition-colors"
           >
             <button
-              onClick={() => setHoveredId(isExpanded ? null : project.id)}
+              onClick={() => setExpandedId(isExpanded ? null : project.id)}
               className="w-full text-left font-display text-2xl md:text-3xl text-primary hover:text-amber transition-colors flex items-center justify-between cursor-pointer focus:outline-none py-1"
             >
               <span>{project.title}</span>

@@ -6,8 +6,17 @@ import { motion } from "framer-motion";
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  // Only render on coarse-pointer-free (desktop) devices, after mount
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    // Detect touch/coarse-pointer devices — never show custom cursor on mobile
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
+
+    setIsDesktop(true);
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -36,10 +45,8 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Hide cursor on touch devices
-  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
-    return null;
-  }
+  // Don't render anything until we know this is a non-touch desktop device
+  if (!isDesktop) return null;
 
   return (
     <motion.div
