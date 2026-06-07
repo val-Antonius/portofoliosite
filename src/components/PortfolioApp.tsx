@@ -19,7 +19,7 @@ const chapterComponents: Record<string, React.FC> = {
 };
 
 export default function PortfolioApp() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { currentChapter } = usePortfolioContext();
 
   const ActiveComponent = chapterComponents[currentChapter.id] || OverviewChapter;
@@ -30,14 +30,14 @@ export default function PortfolioApp() {
         {loading && <LoadingScreen key="loading" onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
-      <div className="relative min-h-screen flex flex-col w-full overflow-hidden">
+      <div className="relative h-screen flex flex-col w-full overflow-hidden">
         {/* Navigation & Header Layer */}
         <div className="relative z-40 bg-canvas">
           <TopBar />
         </div>
 
         {/* Content Layer */}
-        <main className={`flex-1 relative z-10 w-full max-w-7xl mx-auto ${currentChapter.id !== 'about' ? 'overflow-hidden' : 'overflow-y-auto'}`}>
+        <main className="flex-1 relative z-10 w-full max-w-7xl mx-auto overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentChapter.id}

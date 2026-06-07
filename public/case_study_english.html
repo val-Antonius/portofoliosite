@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study 2026 - Data Analyst & Business Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+
+  --ink:       #1a1a1a;
+  --ink-2:     #3d3d3a;
+  --ink-3:     #6b6b66;
+  --ink-4:     #9a9a94;
+  --paper:     #fafaf8;
+  --paper-2:   #f2f1ed;
+  --paper-3:   #e8e6e0;
+  --border:    #dddbd4;
+
+  /* accent per project */
+  --p1:        #4338a8;   /* credit scoring — indigo */
+  --p1-light:  #eeedfe;
+  --p1-mid:    #7f77dd;
+  --p2:        #0f6e56;   /* xflair — teal */
+  --p2-light:  #e1f5ee;
+  --p2-mid:    #1d9e75;
+  --p3:        #854f0b;   /* whser — amber */
+  --p3-light:  #faeeda;
+  --p3-mid:    #ef9f27;
+
+  --page-w: 210mm;
+  --page-h: 297mm;
+}
+
+html { font-family: var(--sans); color: var(--ink); background: #d0cec8; }
+body { margin: 0; }
+
+/* ============================================================
+   PAGE SYSTEM
+   ============================================================ */
+.page {
+  width: var(--page-w);
+  min-height: var(--page-h);
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto 24px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.18);
+}
+
+@media print {
+  html { background: white; }
+  body { margin: 0; }
+  .page {
+    width: 100%;
+    min-height: 0;
+    height: 297mm;
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .no-print { display: none !important; }
+}
+
+/* ============================================================
+   TYPOGRAPHY SYSTEM
+   ============================================================ */
+.t-display { font-family: var(--serif); font-size: 52px; line-height: 1.05; color: var(--ink); }
+.t-h1      { font-family: var(--serif); font-size: 34px; line-height: 1.15; color: var(--ink); }
+.t-h2      { font-family: var(--serif); font-size: 22px; line-height: 1.25; color: var(--ink); }
+.t-h3      { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.t-body    { font-family: var(--sans); font-size: 9.5px; line-height: 1.7; color: var(--ink-2); font-weight: 300; }
+.t-body-m  { font-family: var(--sans); font-size: 9.5px; line-height: 1.7; color: var(--ink-2); font-weight: 500; }
+.t-small   { font-family: var(--sans); font-size: 8px; line-height: 1.5; color: var(--ink-3); }
+.t-mono    { font-family: 'Courier New', monospace; font-size: 8.5px; color: var(--ink-3); }
+.t-label   { font-family: var(--sans); font-size: 7.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-4); }
+
+/* ============================================================
+   LAYOUT HELPERS
+   ============================================================ */
+.row    { display: flex; }
+.col    { display: flex; flex-direction: column; }
+.gap-4  { gap: 4px; }
+.gap-8  { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.gap-20 { gap: 20px; }
+.gap-24 { gap: 24px; }
+
+/* ============================================================
+   SHARED COMPONENTS
+   ============================================================ */
+.section-rule {
+  width: 32px; height: 2px;
+  background: currentColor;
+  margin-bottom: 10px;
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.metric-box {
+  background: var(--paper-2);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.metric-num {
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.metric-label {
+  font-family: var(--sans);
+  font-size: 7.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.sidebar-accent {
+  width: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.card {
+  background: var(--paper-2);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.decision-block {
+  border-left: 2.5px solid var(--border);
+  padding-left: 12px;
+  margin-bottom: 12px;
+}
+
+/* page number footer */
+.pg-footer {
+  position: absolute;
+  bottom: 20px;
+  right: 28px;
+  font-family: var(--sans);
+  font-size: 7.5px;
+  color: var(--ink-4);
+  letter-spacing: 0.06em;
+}
+
+/* horizontal rule */
+hr.thin { border: none; border-top: 0.5px solid var(--border); margin: 14px 0; }
+
+/* ============================================================
+   PAGE 1 — COVER
+   ============================================================ */
+#p1 {
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.cover-top {
+  padding: 48px 48px 0;
+  flex: 1;
+}
+
+.cover-tagline {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #9a9a94;
+  margin-bottom: 28px;
+}
+
+.cover-name {
+  font-family: var(--serif);
+  font-size: 64px;
+  line-height: 1.0;
+  color: #fafaf8;
+  margin-bottom: 6px;
+}
+
+.cover-role {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 24px;
+  color: #888880;
+  margin-bottom: 40px;
+}
+
+.cover-strip {
+  height: 1px;
+  background: linear-gradient(90deg, #4338a8 0%, #0f6e56 50%, #854f0b 100%);
+  margin-bottom: 32px;
+}
+
+.cover-bio {
+  font-family: var(--sans);
+  font-size: 10px;
+  line-height: 1.8;
+  color: #9a9a94;
+  font-weight: 300;
+  max-width: 380px;
+  margin-bottom: 40px;
+}
+
+.cover-stack-label {
+  font-family: var(--sans);
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #5a5a54;
+  margin-bottom: 10px;
+}
+
+.stack-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 40px;
+}
+
+.stack-pill {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 400;
+  color: #9a9a94;
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 3px;
+  padding: 4px 10px;
+  letter-spacing: 0.04em;
+}
+
+.cover-bottom {
+  padding: 28px 48px;
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cover-contact-item {
+  font-family: var(--sans);
+  font-size: 8px;
+  color: #6b6b66;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+
+.cover-contact-val {
+  font-family: var(--sans);
+  font-size: 9px;
+  color: #9a9a94;
+  font-weight: 400;
+}
+
+.cover-year {
+  font-family: var(--serif);
+  font-size: 48px;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+}
+
+/* ============================================================
+   PAGE 2 — ABOUT
+   ============================================================ */
+.page-inner {
+  padding: 44px 48px;
+  height: 100%;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.page-header-left { flex: 1; }
+.page-header-num {
+  font-family: var(--serif);
+  font-size: 72px;
+  line-height: 1;
+  color: var(--paper-3);
+  position: absolute;
+  top: 32px;
+  right: 40px;
+}
+
+.skill-table { width: 100%; border-collapse: collapse; }
+.skill-table th {
+  font-family: var(--sans);
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  padding: 6px 8px;
+  text-align: left;
+  border-bottom: 0.5px solid var(--border);
+}
+.skill-table td {
+  font-family: var(--sans);
+  font-size: 8.5px;
+  color: var(--ink-2);
+  padding: 7px 8px;
+  border-bottom: 0.5px solid var(--paper-3);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.skill-table tr:last-child td { border-bottom: none; }
+
+.bar-wrap { display: flex; gap: 2px; align-items: center; }
+.bar-seg {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--paper-3);
+}
+.bar-seg.on { background: var(--ink); }
+
+/* ============================================================
+   PAGE 3 — PROJECT MAP
+   ============================================================ */
+.proj-map-card {
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.proj-map-header {
+  padding: 14px 18px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.proj-num-badge {
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.proj-map-body {
+  padding: 12px 18px;
+  display: flex;
+  gap: 20px;
+}
+
+.proj-map-col { flex: 1; }
+
+/* ============================================================
+   PROJECT PAGE HEADER BAND
+   ============================================================ */
+.proj-band {
+  padding: 28px 48px 20px;
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.proj-band-num {
+  font-family: var(--serif);
+  font-size: 80px;
+  line-height: 1;
+  opacity: 0.07;
+  flex-shrink: 0;
+}
+
+.proj-band-content { flex: 1; }
+
+.proj-band-label {
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   FLOW DIAGRAM (CSS-based, no SVG needed)
+   ============================================================ */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 14px 0;
+}
+
+.flow-node {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.flow-box {
+  border-radius: 6px;
+  padding: 8px 6px;
+  margin: 0 4px;
+  border: 0.5px solid var(--border);
+}
+
+.flow-arrow {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--ink-4);
+  margin: 0 -2px;
+}
+
+.flow-title {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.flow-sub {
+  font-family: var(--sans);
+  font-size: 7px;
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+/* model comparison table */
+.model-table { width: 100%; border-collapse: collapse; }
+.model-table th {
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-4); padding: 6px 10px;
+  text-align: left; border-bottom: 0.5px solid var(--border);
+}
+.model-table td {
+  font-size: 8.5px; color: var(--ink-2);
+  padding: 8px 10px; border-bottom: 0.5px solid var(--paper-3);
+  vertical-align: middle;
+}
+.model-table tr.winner td { background: var(--paper-2); font-weight: 500; }
+.model-table tr:last-child td { border-bottom: none; }
+
+.winner-badge {
+  display: inline-block;
+  font-size: 7px; font-weight: 600;
+  background: #1a1a1a; color: #fafaf8;
+  padding: 2px 7px; border-radius: 3px;
+  letter-spacing: 0.06em;
+}
+
+/* feature importance bars */
+.feat-row {
+  display: flex; align-items: center;
+  gap: 10px; margin-bottom: 7px;
+}
+.feat-name {
+  font-size: 8px; color: var(--ink-2);
+  width: 130px; flex-shrink: 0;
+  font-weight: 500;
+}
+.feat-bar-bg {
+  flex: 1; height: 6px;
+  background: var(--paper-3);
+  border-radius: 3px; overflow: hidden;
+}
+.feat-bar-fill { height: 100%; border-radius: 3px; }
+.feat-val { font-size: 7.5px; color: var(--ink-4); width: 30px; text-align: right; }
+
+/* SHAP mockup */
+.shap-bar-row {
+  display: flex; align-items: center;
+  margin-bottom: 6px; gap: 8px;
+}
+.shap-feat-label { font-size: 7.5px; color: var(--ink-2); width: 110px; flex-shrink: 0; }
+.shap-bar-wrap { flex: 1; position: relative; height: 10px; }
+.shap-center { position: absolute; left: 50%; top: 0; bottom: 0; width: 0.5px; background: var(--border); }
+.shap-neg { position: absolute; right: 50%; top: 1px; height: 8px; border-radius: 2px 0 0 2px; background: #3B8BD4; }
+.shap-pos { position: absolute; left: 50%; top: 1px; height: 8px; border-radius: 0 2px 2px 0; background: #E8593C; }
+.shap-val { font-size: 7.5px; color: var(--ink-4); width: 36px; text-align: right; }
+
+/* KPI table */
+.kpi-table { width: 100%; border-collapse: collapse; }
+.kpi-table th {
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-4); padding: 6px 8px;
+  text-align: left; border-bottom: 0.5px solid var(--border);
+}
+.kpi-table td {
+  font-size: 8px; color: var(--ink-2);
+  padding: 7px 8px; border-bottom: 0.5px solid var(--paper-3);
+  vertical-align: top; line-height: 1.5;
+}
+.kpi-table tr:last-child td { border-bottom: none; }
+
+.sig-badge {
+  display: inline-block;
+  font-size: 6.5px; font-weight: 600;
+  padding: 2px 6px; border-radius: 3px;
+  letter-spacing: 0.06em;
+}
+.sig-normal  { background: #EAF3DE; color: #3B6D11; }
+.sig-attn    { background: #FAEEDA; color: #854F0B; }
+.sig-crit    { background: #FCEBEB; color: #A32D2D; }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PAGE 1 — COVER
+     ============================================================ -->
+<div class="page" id="p1">
+  <div class="cover-top">
+    <div class="cover-tagline">Case Study · 2026</div>
+    <div class="cover-name">Antonius<br>Valentino</div>
+    <div class="cover-role">Business Intelligence · Data Analyst</div>
+    <div class="cover-strip"></div>
+    <div class="cover-bio">
+      Information Systems fresh graduate interested in building data-driven systems; from analytical pipelines and KPI layers to explainable ML models. <br>The following projects illustrate how I approach real business problems with a measurable technical approach.
+    </div>
+   <div class="cover-stack-label">Core Stack</div>
+    <div class="stack-pills">
+      <span class="stack-pill">Python</span>
+      <span class="stack-pill">XGBoost · LightGBM</span>
+      <span class="stack-pill">SHAP</span>
+      <span class="stack-pill">Streamlit</span>
+      <span class="stack-pill">Pandas · NumPy</span>
+      <span class="stack-pill">Scikit-learn</span>
+      <span class="stack-pill">Optuna</span>
+      <span class="stack-pill">MySQL</span>
+      <span class="stack-pill">Next.js</span>
+      <span class="stack-pill">Ollama · Gemma 3</span>
+    </div>
+    <div class="cover-stack-label">Domain</div>
+    <div class="stack-pills">
+      <span class="stack-pill">Credit Risk Modelling</span>
+      <span class="stack-pill">Sports Analytics</span>
+      <span class="stack-pill">Full-stack Development</span>
+      <span class="stack-pill">Explainable AI</span>
+    </div>
+  </div>
+  <div class="cover-bottom">
+  <div>
+      <div class="cover-contact-item">Email</div>
+      <a href="mailto:thonybo6661@gmail.com" style="text-decoration:none; color:inherit;">
+        <div class="cover-contact-val">thonybo6661@gmail.com</div>
+      </a>
+      <div style="height:10px"></div>
+      <div class="cover-contact-item">LinkedIn</div>
+      <a href="https://www.linkedin.com/in/antonius-valentino/" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="cover-contact-val">linkedin.com/in/antonius-valentino</div>
+      </a>
+      <div style="height:10px"></div>
+      <div class="cover-contact-item">GitHub</div>
+      <a href="https://github.com/val-Antonius" target="_blank" style="text-decoration:none; color:inherit;">
+        <div class="cover-contact-val">github.com/val-Antonius</div>
+      </a>
+    </div>
+    <div class="cover-year">2026</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE 2 — ABOUT ME
+     ============================================================ -->
+<div class="page" id="p2">
+  <div class="page-inner" style="position:relative;">
+    <div class="page-header-num">02</div>
+
+    <div style="margin-bottom:28px; padding-bottom:20px; border-bottom:0.5px solid var(--border);">
+      <div class="t-label" style="margin-bottom:8px; color:var(--ink-4);">About Me</div>
+      <div class="t-h1" style="margin-bottom:16px;">Technology follows the problem</div>
+      <div class="t-body" style="max-width:420px;">
+        I view data as a tool for understanding business challenges and enabling better decision-making. Therefore, every project in this case study starts with real-world needs and problems faced by users or organizations, rather than being driven solely by an interest in a particular technology.
+      </div>
+    </div>
+
+    <div class="row gap-24" style="margin-bottom:24px;">
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:12px;">Work Approach</div>
+        <div class="decision-block" style="border-color: var(--p1);">
+          <div class="t-body-m" style="margin-bottom:3px;">Data leakage prevention</div>
+          <div class="t-body">Every pipeline is designed with strict separation: the scaler is fit on the training data, transformed on validation/test data, and SMOTE is applied only to the training set. This is not just a best practice, but a way to ensure the reported metrics reflect model performance on unseen data.</div>
+        </div>
+        <div class="decision-block" style="border-color: var(--p2);">
+          <div class="t-body-m" style="margin-bottom:3px;">Explainability as a core feature</div>
+          <div class="t-body">From SHAP force plots to the Model Integrity page, every model decision must be explainable to a loan officer, a club analyst, or a laundry business owner.</div>
+        </div>
+        <div class="decision-block" style="border-color: var(--p3);">
+          <div class="t-body-m" style="margin-bottom:3px;">Business metrics above model metrics</div>
+          <div class="t-body">An AUC of 0.86 only becomes meaningful when translated into something concrete: how many defaults were successfully detected, how many manual working hours can be reduced, or what the impact is on daily business decisions.</div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:12px;">Technical Competence</div>
+
+        <table class="skill-table">
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>Tools</th>
+              <th style="width:70px;">Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:500; color:var(--ink);">ML / Modeling</td>
+              <td>XGBoost, LightGBM, Scikit-learn, Optuna, SMOTE</td>
+              <td>
+                <div class="bar-wrap">
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight:500; color:var(--ink);">Explainability</td>
+              <td>SHAP (TreeExplainer, force plots, summary plots)</td>
+              <td>
+                <div class="bar-wrap">
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight:500; color:var(--ink);">Data Engineering</td>
+              <td>Pandas, NumPy, Feature Engineering, Time-series split</td>
+              <td>
+                <div class="bar-wrap">
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight:500; color:var(--ink);">Visualization  &amp; App</td>
+              <td>Streamlit, Plotly, Matplotlib</td>
+              <td>
+                <div class="bar-wrap">
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight:500; color:var(--ink);">Database &amp; Backend</td>
+              <td>MySQL, Next.js API Routes, Prepared Statements</td>
+              <td>
+                <div class="bar-wrap">
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight:500; color:var(--ink);">Business Analysis</td>
+              <td>KPI design, business metric interpretation, domain research</td>
+              <td>
+                <div class="bar-wrap">
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg on" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                  <div class="bar-seg" style="width:10px;"></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="height:16px;"></div>
+        <div class="t-label" style="margin-bottom:8px;">Pendidikan</div>
+        <div class="t-body-m">BSc Information Systems</div>
+        <div class="t-body">Telkom University · 2021–2026</div>
+        <!-- <div class="t-body" style="color:var(--ink-4); margin-top:3px;">IPK: [X.XX] / 4.00</div> -->
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">2 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 3 — PROJECT MAP
+     ============================================================ -->
+<div class="page" id="p3">
+  <div class="page-inner" style="position:relative;">
+    <div class="page-header-num">03</div>
+    <div class="t-label" style="margin-bottom:8px;">Project Summary</div>
+    <div class="t-h1" style="margin-bottom:6px;">Three projects,<br>three different domains</div>
+    <div class="t-body" style="margin-bottom:24px; max-width:380px;">Each project was built from scratch, from data exploration to deployment as an interactive application or production system.</div>
+
+    <!-- PROJECT 1 card -->
+    <div class="proj-map-card">
+      <div class="proj-map-header" style="background: var(--p1-light);">
+        <div class="proj-num-badge" style="color: var(--p1);">01</div>
+        <div style="flex:1;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <div class="t-body-m" style="font-size:11px; color:var(--ink); margin-bottom:2px;">Predictive Credit Scoring for Indonesian MSMEs</div>
+              <div class="t-body" style="color:var(--ink-3);">Fintech · Credit Risk · Explainable AI</div>
+            </div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap; justify-content:flex-end;">
+              <span class="tag" style="background:var(--p1-light); color:var(--p1);">XGBoost</span>
+              <span class="tag" style="background:var(--p1-light); color:var(--p1);">SHAP</span>
+              <span class="tag" style="background:var(--p1-light); color:var(--p1);">Streamlit</span>
+              <span class="tag" style="background:var(--p1-light); color:var(--p1);">Optuna</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-map-body">
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Problem</div>
+          <div class="t-body">Manual, slow, and inconsistent MSME credit evaluation. No system explains <em>why</em> a borrower is rejected.</div>
+        </div>
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Solution</div>
+          <div class="t-body">End-to-end ML pipeline: EDA, Feature Engineering, XGBoost, Optuna, SHAP, up to a Streamlit app with a threshold override feature.</div>
+        </div>
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Key Metrics</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p1);">86.4%</div><div class="t-label" style="font-size:6.5px;">AUC-ROC</div></div>
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p1);">55%</div><div class="t-label" style="font-size:6.5px;">Default Detected</div></div>
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p1);"><1s</div><div class="t-label" style="font-size:6.5px;">Decision Time</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 card -->
+    <div class="proj-map-card">
+      <div class="proj-map-header" style="background: var(--p2-light);">
+        <div class="proj-num-badge" style="color: var(--p2);">02</div>
+        <div style="flex:1;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <div class="t-body-m" style="font-size:11px; color:var(--ink); margin-bottom:2px;">xFlair — Predicting Nutmegs in the 2026 World Cup</div>
+              <div class="t-body" style="color:var(--ink-3);">Sports Analytics · Predictive Modelling · StatsBomb</div>
+            </div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap; justify-content:flex-end;">
+              <span class="tag" style="background:var(--p2-light); color:var(--p2);">XGBoost</span>
+              <span class="tag" style="background:var(--p2-light); color:var(--p2);">StatsBombpy</span>
+              <span class="tag" style="background:var(--p2-light); color:var(--p2);">SHAP</span>
+              <span class="tag" style="background:var(--p2-light); color:var(--p2);">Plotly</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-map-body">
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Problem</div>
+          <div class="t-body">No system quantitatively measures a football player's <em>flair</em> and creativity from event data.</div>
+        </div>
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Solution</div>
+          <div class="t-body">Time-series pipeline from 522K StatsBomb events, using a Player-Match formulation to avoid mathematical tautology.</div>
+        </div>
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Key Metrics</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p2);">27.9%</div><div class="t-label" style="font-size:6.5px;">MAE Improvement</div></div>
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p2);">522K</div><div class="t-label" style="font-size:6.5px;">Events Processed</div></div>
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p2);">0</div><div class="t-label" style="font-size:6.5px;">Data Leakage</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 card -->
+    <div class="proj-map-card">
+      <div class="proj-map-header" style="background: var(--p3-light);">
+        <div class="proj-num-badge" style="color: var(--p3);">03</div>
+        <div style="flex:1;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <div class="t-body-m" style="font-size:11px; color:var(--ink); margin-bottom:2px;">WHSER — Laundry Management Platform</div>
+              <div class="t-body" style="color:var(--ink-3);">Full-stack · Business Intelligence · LLM Integration</div>
+            </div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap; justify-content:flex-end;">
+              <span class="tag" style="background:var(--p3-light); color:var(--p3);">Next.js</span>
+              <span class="tag" style="background:var(--p3-light); color:var(--p3);">MySQL</span>
+              <span class="tag" style="background:var(--p3-light); color:var(--p3);">self-hosted LLM</span>
+              <span class="tag" style="background:var(--p3-light); color:var(--p3);">TypeScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-map-body">
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Problem</div>
+          <div class="t-body">Unstructured high-volume laundry operations: orders are easily missed, SLAs are frequently violated, and there is no visibility into profitability per service.</div>
+        </div>
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Solution</div>
+          <div class="t-body">Dual-layer architecture: operational layer (real-time POS) plus analytical layer (immutable snapshot plus 8 KPIs plus LLM insight).</div>
+        </div>
+        <div class="proj-map-col">
+          <div class="t-label" style="margin-bottom:6px;">Key Metrics</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p3);">20</div><div class="t-label" style="font-size:6.5px;">Database Tables</div></div>
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p3);">8</div><div class="t-label" style="font-size:6.5px;">KPIs Calculated</div></div>
+            <div><div style="font-size:14px; font-family:var(--serif); color:var(--p3);">Est. 30h</div><div class="t-label" style="font-size:6.5px;">Saved/Week</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">3 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 4 — PROJECT 1: OVERVIEW
+     ============================================================ -->
+<div class="page" id="p4">
+  <div class="proj-band" style="border-left: 4px solid var(--p1);">
+    <div class="proj-band-num" style="color: var(--p1);">01</div>
+    <div class="proj-band-content">
+      <div class="proj-band-label" style="color: var(--p1);">Project 01 — Credit Risk</div>
+      <div class="t-h1">Predictive Credit Scoring<br>for Indonesian MSMEs</div>
+    </div>
+    <div style="flex-shrink:0; text-align:right;">
+      <div class="t-label" style="margin-bottom:5px;">Pages</div>
+      <div style="font-family:var(--serif); font-size:18px; color:var(--p1);">04 — 07</div>
+    </div>
+  </div>
+
+  <div style="padding: 24px 48px;">
+    <!-- problem statement -->
+    <div class="row gap-20" style="margin-bottom:20px;">
+      <div style="flex:3;">
+        <div class="t-label" style="margin-bottom:8px; color:var(--p1);">Problem Statement</div>
+        <div class="t-body" style="margin-bottom:10px;">
+          Banks and fintechs serving Indonesian MSMEs face a fundamental dilemma: the manual credit evaluation process can take 30 to 60 minutes per application, results are inconsistent across loan officers, and there is no explanation provided to customers when their applications are rejected. As a result, two problems arise simultaneously: risky borrowers slipping through the selection, and eligible borrowers being rejected
+        </div>
+        <div class="t-body">
+          The core challenge is not just building an accurate model, but <strong style="font-weight:600;">optimizing the decision threshold</strong>; the boundary between "approve" and "reject" that reflects the business risk appetite, not just statistical metrics.
+        </div>
+      </div>
+      <div style="flex:2;">
+        <div class="t-label" style="margin-bottom:8px; color:var(--p1);">Business Impact</div>
+        <div class="row gap-8" style="flex-wrap:wrap;">
+          <div class="metric-box" style="flex:1; min-width:80px; border-top: 2px solid var(--p1);">
+            <div class="metric-num" style="color:var(--p1);">86.4%</div>
+            <div class="metric-label">AUC-ROC Test Set</div>
+          </div>
+          <div class="metric-box" style="flex:1; min-width:80px; border-top: 2px solid var(--p1);">
+            <div class="metric-num" style="color:var(--p1);">55%</div>
+            <div class="metric-label">Default Detected</div>
+          </div>
+        </div>
+        <div class="row gap-8" style="flex-wrap:wrap; margin-top:8px;">
+          <div class="metric-box" style="flex:1; min-width:80px; border-top: 2px solid var(--p1);">
+            <div class="metric-num" style="color:var(--p1);"><1s</div>
+            <div class="metric-label">Decision Time</div>
+          </div>
+          <div class="metric-box" style="flex:1; min-width:80px; border-top: 2px solid var(--p1);">
+            <div class="metric-num" style="color:var(--p1);">$374k</div>
+            <div class="metric-label">Estimated Savings/Year</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pipeline diagram -->
+    <div class="t-label" style="margin-bottom:10px; color:var(--p1);">End-to-End Pipeline</div>
+    <div class="flow">
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p1-light); border-color:var(--p1-mid);">
+          <div class="flow-title" style="color:var(--p1);">Phase 1</div>
+          <div class="flow-sub" style="color:var(--p1);">EDA</div>
+          <div class="flow-sub" style="margin-top:4px;">150K rows<br>6.8% default<br>Class imbalance</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p1-light); border-color:var(--p1-mid);">
+          <div class="flow-title" style="color:var(--p1);">Phase 2</div>
+          <div class="flow-sub" style="color:var(--p1);">Feature Eng.</div>
+          <div class="flow-sub" style="margin-top:4px;">+8 features<br>RobustScaler<br>SMOTE (train only)</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p1-light); border-color:var(--p1-mid);">
+          <div class="flow-title" style="color:var(--p1);">Phase 3</div>
+          <div class="flow-sub" style="color:var(--p1);">Modeling</div>
+          <div class="flow-sub" style="margin-top:4px;">XGBoost + Optuna<br>Threshold tuning<br>SHAP values</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p1-light); border-color:var(--p1-mid);">
+          <div class="flow-title" style="color:var(--p1);">Phase 4</div>
+          <div class="flow-sub" style="color:var(--p1);">Streamlit App</div>
+          <div class="flow-sub" style="margin-top:4px;">Interactive UI<br>SHAP force plot<br>Threshold override</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="thin">
+
+    <!-- what makes it different -->
+    <div class="t-label" style="margin-bottom:12px; color:var(--p1);">What Sets This Project Apart</div>
+    <div class="row gap-12">
+      <div class="card" style="flex:1; border-top: 2px solid var(--p1);">
+        <div class="t-body-m" style="margin-bottom:4px;">Threshold as a Policy Artifact</div>
+        <div class="t-body">The 0.5354 threshold is saved as a separate JSON file, version-controlled, and can be overridden from the UI without retraining the model.</div>
+      </div>
+      <div class="card" style="flex:1; border-top: 2px solid var(--p1);">
+        <div class="t-body-m" style="margin-bottom:4px;">Zero Data Leakage by Design</div>
+        <div class="t-body">RobustScaler is fit only on the training set. SMOTE is applied only to the training set. Validation and test sets reflect the true production distribution</div>
+      </div>
+      <div class="card" style="flex:1; border-top: 2px solid var(--p1);">
+        <div class="t-body-m" style="margin-bottom:4px;">Explainability is Mandatory, Not Optional</div>
+        <div class="t-body">Every credit decision is accompanied by a SHAP force plot. A loan officer can read specific reasons, such as "two 90-day late payment incidents pushed the score toward default."</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">4 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 5 — PROJECT 1: TECHNICAL DEPTH
+     ============================================================ -->
+<div class="page" id="p5">
+  <div style="height:4px; background: var(--p1);"></div>
+  <div style="padding: 28px 48px;">
+    <div class="t-label" style="margin-bottom:4px; color:var(--p1);">Project 01 — Technical Depth</div>
+    <div class="t-h2" style="margin-bottom:20px;">Critical technical decisions<br>and their reasons</div>
+
+    <div class="row gap-20">
+      <div style="flex:1;">
+
+        <div class="decision-block" style="border-color:var(--p1);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:5px;">
+            <div class="t-body-m">01 — RobustScaler vs StandardScaler</div>
+            <span class="tag" style="background:var(--p1-light); color:var(--p1);">Data Prep</span>
+          </div>
+          <div class="t-body"><strong style="font-weight:600;">Problem:</strong> The data has extreme outliers (income up to $3.8M, utilization 1.5). StandardScaler uses mean and standard deviation, which are sensitive to outliers.</div>
+          <div class="t-body" style="margin-top:4px;"><strong style="font-weight:600;">Decision:</strong> RobustScaler uses the median and IQR, making it more resistant to outliers without sacrificing the interpretability of the linear transformation.</div>
+        </div>
+
+        <div class="decision-block" style="border-color:var(--p1);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:5px;">
+            <div class="t-body-m">02 — Stratified Split (60/20/20)</div>
+            <span class="tag" style="background:var(--p1-light); color:var(--p1);">Validation</span>
+          </div>
+          <div class="t-body"><strong style="font-weight:600;">Problem:</strong> The target class is imbalanced (93.2% good, 6.8% default). A random split risks producing an uneven distribution.</div>
+          <div class="t-body" style="margin-top:4px;"><strong style="font-weight:600;">Decision:</strong> <code style="font-family:monospace; font-size:8px; background:var(--paper-2); padding:1px 4px; border-radius:2px;">train_test_split(..., stratify=y)</code> ensures each split has approximately 6.8% default, resulting in comparable metrics.</div>
+        </div>
+
+        <div class="decision-block" style="border-color:var(--p1);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:5px;">
+            <div class="t-body-m">03 — SMOTE only on Train Set</div>
+            <span class="tag" style="background:var(--p1-light); color:var(--p1);">Imbalance</span>
+          </div>
+          <div class="t-body"><strong style="font-weight:600;">Problem:</strong> Applying SMOTE before the split causes data leakage, as synthetic samples from the minority class will "leak" into the validation set.</div>
+          <div class="t-body" style="margin-top:4px;"><strong style="font-weight:600;">Decision:</strong> SMOTE is fit and transformed only on the training set. Validation and test sets remain reflective of the imbalanced production distribution.</div>
+        </div>
+
+        <div class="decision-block" style="border-color:var(--p1);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:5px;">
+            <div class="t-body-m">04 — Threshold Tuning via F1 Max</div>
+            <span class="tag" style="background:var(--p1-light); color:var(--p1);">Business Logic</span>
+          </div>
+          <div class="t-body"><strong style="font-weight:600;">Problem:</strong> A 0.5 threshold is an arbitrary number that does not reflect asymmetric costs: a false negative (approving a defaulter) is far more expensive than a false positive (rejecting a good borrower).</div>
+          <div class="t-body" style="margin-top:4px;"><strong style="font-weight:600;">Decision:</strong> Sweep the threshold on the validation set and select the one that maximizes the F1-minority score. Result: threshold 0.5354, saved as <code style="font-family:monospace; font-size:8px; background:var(--paper-2); padding:1px 4px; border-radius:2px;">best_threshold.json</code>.</div>
+        </div>
+
+        <div class="decision-block" style="border-color:var(--p1); margin-bottom:0;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:5px;">
+            <div class="t-body-m">05 — SHAP vs LIME</div>
+            <span class="tag" style="background:var(--p1-light); color:var(--p1);">Explainability</span>
+          </div>
+          <div class="t-body"><strong style="font-weight:600;">Problem:</strong> Loan officers and regulators require accountable explanations, including for audit or regulatory compliance purposes.</div>
+          <div class="t-body" style="margin-top:4px;"><strong style="font-weight:600;">Decision:</strong> SHAP uses Shapley values from game theory, which is theoretically stronger than LIME. It supports both local (per borrower) and global (feature importance across the entire dataset) explanations.</div>
+        </div>
+
+      </div>
+
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">Model Comparison</div>
+        <table class="model-table" style="margin-bottom:16px;">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>AUC-ROC</th>
+              <th>F1-Minority</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="winner">
+              <td style="font-weight:600; color:var(--p1);">XGBoost (Tuned)</td>
+              <td style="font-weight:600;">0.8641</td>
+              <td style="font-weight:600;">0.4421</td>
+              <td><span class="winner-badge">Selected</span></td>
+            </tr>
+            <tr>
+              <td>LightGBM</td>
+              <td>0.8503</td>
+              <td>0.3735</td>
+              <td><span class="t-small">+1.4% AUC but −15.7% F1-minority</span></td>
+            </tr>
+            <tr>
+              <td>Logistic Regression</td>
+              <td>0.8475</td>
+              <td>0.3184</td>
+              <td><span class="t-small">Baseline</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="t-body" style="margin-bottom:16px; padding:10px 12px; background:var(--p1-light); border-radius:6px; border-left:2px solid var(--p1);">
+          XGBoost was chosen not because it had the highest AUC, but because its <strong style="font-weight:600;">F1-minority score was 38% higher than LightGBM</strong>. In credit risk, detecting defaults is the primary business priority, not inference speed.
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">Optuna Hyperparameter Tuning</div>
+        <table class="model-table" style="margin-bottom:16px;">
+          <thead>
+            <tr><th>Parameter</th><th>Best Value</th><th>Search Range</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>n_estimators</td><td style="font-weight:500;">350</td><td>100–500</td></tr>
+            <tr><td>max_depth</td><td style="font-weight:500;">5</td><td>3–8</td></tr>
+            <tr><td>learning_rate</td><td style="font-weight:500;">0.08</td><td>0.01–0.3</td></tr>
+            <tr><td>scale_pos_weight</td><td style="font-weight:500;">3.2</td><td>1–5</td></tr>
+          </tbody>
+        </table>
+
+        <div class="t-label" style="margin-bottom:8px; color:var(--p1);">Persisted rtifact</div>
+        <div class="card" style="font-size:8px; line-height:1.8;">
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:4px;">
+            <code style="background:var(--paper-3); padding:2px 6px; border-radius:3px; font-size:7.5px;">best_xgb_model.json</code>
+            <span style="color:var(--ink-3);">— XGBoost model serialized</span>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:4px;">
+            <code style="background:var(--paper-3); padding:2px 6px; border-radius:3px; font-size:7.5px;">scaler.pkl</code>
+            <span style="color:var(--ink-3);">— RobustScaler for inference</span>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <code style="background:var(--paper-3); padding:2px 6px; border-radius:3px; font-size:7.5px;">best_threshold.json</code>
+            <span style="color:var(--ink-3);">— Decision boundary (0.5354)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">5 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 6 — PROJECT 1: EXPLAINABILITY & BUSINESS
+     ============================================================ -->
+<div class="page" id="p6">
+  <div style="height:4px; background: var(--p1);"></div>
+  <div style="padding: 28px 48px;">
+    <div class="t-label" style="margin-bottom:4px; color:var(--p1);">Project 01 — Explainability & Business Insight</div>
+    <div class="t-h2" style="margin-bottom:20px;">Every credit decision<br>must be explainable</div>
+
+    <div class="row gap-20">
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">SHAP Feature Importance (Global)</div>
+        <!-- feature importance bars -->
+        <div style="margin-bottom:16px;">
+          <div class="feat-row">
+            <div class="feat-name">weighted_late_score</div>
+            <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:92%; background:var(--p1);"></div></div>
+            <div class="feat-val">0.312</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">late_90d</div>
+            <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:80%; background:var(--p1);"></div></div>
+            <div class="feat-val">0.271</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">revolving_utilization</div>
+            <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:62%; background:var(--p1-mid);"></div></div>
+            <div class="feat-val">0.210</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">income_per_dependent</div>
+            <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:48%; background:var(--p1-mid);"></div></div>
+            <div class="feat-val">0.163</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">dti_adjusted</div>
+            <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:38%; background:var(--p1-mid);"></div></div>
+            <div class="feat-val">0.129</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">ever_late</div>
+            <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:30%; background:var(--p1-light); border:0.5px solid var(--p1);"></div></div>
+            <div class="feat-val">0.102</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">monthly_income</div>
+            <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:22%; background:var(--p1-light); border:0.5px solid var(--p1);"></div></div>
+            <div class="feat-val">0.075</div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-name">age</div>
+            <div class="feat-bar-bg"><div class="feat-bar-fill" style="width:14%; background:var(--p1-light); border:0.5px solid var(--p1);"></div></div>
+            <div class="feat-val">0.047</div>
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">SHAP Force Plot — Borrower Example (Local)</div>
+        <div class="card" style="background:var(--paper-2);">
+          <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+            <div class="t-body" style="font-size:8px;"><strong style="font-weight:600;">Prediction:</strong> P(default) = 81%</div>
+            <span class="tag" style="background:#FCEBEB; color:#A32D2D; font-size:7px;">Rejected</span>
+          </div>
+          <!-- SHAP bars -->
+          <div style="margin-bottom:6px;">
+            <div class="shap-bar-row">
+              <div class="shap-feat-label">weighted_late_score = 4.2</div>
+              <div class="shap-bar-wrap">
+                <div class="shap-center"></div>
+                <div class="shap-pos" style="width:38%;"></div>
+              </div>
+              <div class="shap-val" style="color:#E8593C;">+0.12</div>
+            </div>
+            <div class="shap-bar-row">
+              <div class="shap-feat-label">utilization_risk = 3 (critical)</div>
+              <div class="shap-bar-wrap">
+                <div class="shap-center"></div>
+                <div class="shap-pos" style="width:25%;"></div>
+              </div>
+              <div class="shap-val" style="color:#E8593C;">+0.08</div>
+            </div>
+            <div class="shap-bar-row">
+              <div class="shap-feat-label">base rate (6.8% default)</div>
+              <div class="shap-bar-wrap">
+                <div class="shap-center"></div>
+              </div>
+              <div class="shap-val" style="color:var(--ink-3);">+0.66</div>
+            </div>
+            <div class="shap-bar-row">
+              <div class="shap-feat-label">income_per_dependent (tinggi)</div>
+              <div class="shap-bar-wrap">
+                <div class="shap-center"></div>
+                <div class="shap-neg" style="width:16%;"></div>
+              </div>
+              <div class="shap-val" style="color:#3B8BD4;">−0.05</div>
+            </div>
+          </div>
+          <div class="t-body" style="font-size:7.5px; font-style:italic; color:var(--ink-3);">
+            "This borrower has two 90-day late payment incidents and credit limit utilization at a critical level, even though income per dependent is reasonably good."
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">Threshold as a Policy Instrument</div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="t-body" style="margin-bottom:8px;">The threshold is a business decision. By saving it as a separate artifact, the lending team can simulate policy changes without touching the model code.</div>
+          <table class="model-table">
+            <thead><tr><th>Threshold</th><th>Approval Rate</th><th>Est. Default Rate</th><th>Strategy</th></tr></thead>
+            <tbody>
+              <tr><td>0.30</td><td>~40%</td><td>&lt;2%</td><td>Ultra-conservative</td></tr>
+              <tr class="winner"><td><strong>0.5354</strong></td><td><strong>~70%</strong></td><td><strong>~5–6%</strong></td><td><strong>Balanced (tuned)</strong></td></tr>
+              <tr><td>0.70</td><td>~95%</td><td>~15%</td><td>Highly inclusive</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">Feature Engineering — Business Rationale</div>
+        <div style="margin-bottom:0;">
+          <div class="decision-block" style="border-color:var(--border);">
+            <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">weighted_late_score</div>
+            <div class="t-body"><code style="font-size:7.5px; background:var(--paper-2); padding:1px 4px; border-radius:2px;">late_30 × 1 + late_60 × 2 + late_90 × 4</code>- 90-day late payments are a charge-off signal (banking industry standard). The 4× weight reflects a different level of severity.</div>
+          </div>
+          <div class="decision-block" style="border-color:var(--border);">
+            <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">income_per_dependent</div>
+            <div class="t-body">An income of 5 million with 4 dependents means something very different from 5 million with no dependents. This feature captures family financial pressure that is not visible from raw income numbers alone.</div>
+          </div>
+          <div class="decision-block" style="border-color:var(--border); margin-bottom:0;">
+            <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">dti_adjusted</div>
+            <div class="t-body">Debt-to-income ratio is a banking regulatory standard (safe limit 30–40%), sso this feature allows the model to "speak the same language" as the risk manager.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">6 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 7 — PROJECT 1: KEY LEARNINGS
+     ============================================================ -->
+<div class="page" id="p7">
+  <div style="height:4px; background: var(--p1);"></div>
+  <div style="padding: 28px 48px;">
+    <div class="t-label" style="margin-bottom:4px; color:var(--p1);">Project 01 — Learnings & Takeaways</div>
+    <div class="t-h2" style="margin-bottom:20px;">What I learned<br>and its limitations</div>
+
+    <div class="row gap-20">
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">Critical Learnings</div>
+
+        <div class="card" style="margin-bottom:10px; border-left:3px solid var(--p1);">
+          <div class="t-body-m" style="margin-bottom:4px;">1. "Perfect" results are a red flag</div>
+          <div class="t-body">In early iterations, the model MAE was almost zero. I was skeptical, repeated the process, and found that the target variable could be mathematically derived from two features (tautology). This taught me that honest validation is more important than impressive metrics.</div>
+        </div>
+
+        <div class="card" style="margin-bottom:10px; border-left:3px solid var(--p1);">
+          <div class="t-body-m" style="margin-bottom:4px;">2. The threshold is a business decision, not a technical choice</div>
+          <div class="t-body">I initially used a 0.5 threshold by default. After understanding the context of MSME credit more deeply, I realized the right threshold must reflect the asymmetric costs between false negatives and false positives, and must be adjustable without retraining.</div>
+        </div>
+
+        <div class="card" style="margin-bottom:10px; border-left:3px solid var(--p1);">
+          <div class="t-body-m" style="margin-bottom:4px;">3. Feature engineering from domain knowledge over statistical correlation</div>
+          <div class="t-body">Adding weighted_late_score (which stems from the understanding that 90-day late payments are the charge-off limit in banking) provided more meaningful improvement than feature engineering based solely on correlation.</div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; margin-top:14px; color:var(--p1);">Acknowledged Limitations</div>
+        <div class="t-body" style="margin-bottom:6px;">• <strong style="font-weight:500;">Data is from  2009</strong> (financial crisis) — so the default rate might not represent current Indonesian MSME conditions.</div>
+        <div class="t-body" style="margin-bottom:6px;">• <strong style="font-weight:500;">Recall is only 55%</strong> — meaning approximately 45% of defaults slip through the prediction. The model needs to be combined with manual review for borderline cases.</div>
+        <div class="t-body">• <strong style="font-weight:500;">Fairness audit has not been conducted</strong> — age as a feature has the potential to become a proxy for discrimination. A disparate impact audit is required before production deployment.</div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">Project Summary</div>
+        <div class="card" style="background:var(--p1-light); border:0.5px solid var(--p1-mid); margin-bottom:14px;">
+          <div class="t-body" style="font-size:8.5px; line-height:1.8; font-style:italic; color:var(--p1);">
+            "Developed explainable credit risk model (86.4% AUC-ROC) with interactive policy dashboard; detected 55% of defaults pre-approval through XGBoost + SHAP pipeline with zero data leakage; operationalized decision threshold as version-controlled artifact enabling risk appetite simulation without model retraining"
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p1);">Design Decision</div>
+        <div class="card" style="border:0.5px solid var(--border);">
+          <div class="t-body-m" style="margin-bottom:6px; font-size:8.5px;">Trade-off yang menentukan pilihan model:</div>
+          <div class="t-body" style="font-size:8px; line-height:1.8; margin-bottom:8px;">
+            <em>"In this project, I chose XGBoost not because it had the highest AUC, but because its F1-minority score was 38% better than LightGBM. In credit scoring, a model that misses defaults is a business failure, even if its AUC is perfect</em>
+          </div>
+          <div class="t-body" style="font-size:8px; line-height:1.8;">
+            <em>This insight came from understanding that the cost of a false negative, approving a borrower who later defaults, is far greater than the cost of a false positive, rejecting an actually eligible borrower. That is why I also saved the threshold as a separate artifact that the lending team can adjust without needing to call a data scientist."</em>
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:8px; margin-top:14px; color:var(--p1);">Link</div>
+        <div class="t-body" style="font-size:8px; margin-bottom:4px;">
+          GitHub: <a href="https://github.com/val-Antonius/predictive_credit_scoring_for_umkm.git "target="_blank" style="font-size:7.5px; background:var(--paper-2); padding:1px 5px; border-radius:2px; font-family:monospace; color:inherit; text-decoration:none;">github.com/val-Antonius/predictive_credit_scoring_for_umkm</a>
+        </div>
+        <div class="t-body" style="font-size:8px;">
+        Demo App: <a href="https://shap-credit-scoring.streamlit.app/" target="_blank" style="font-size:7.5px; background:var(--paper-2); padding:1px 5px; border-radius:2px; font-family:monospace; color:inherit; text-decoration:none;">shap-credit-scoring.streamlit.app</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">7 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 8 — PROJECT 2: OVERVIEW
+     ============================================================ -->
+<div class="page" id="p8">
+  <div class="proj-band" style="border-left: 4px solid var(--p2);">
+    <div class="proj-band-num" style="color: var(--p2);">02</div>
+    <div class="proj-band-content">
+      <div class="proj-band-label" style="color: var(--p2);">Project 02 — Sports Analytics</div>
+      <div class="t-h1">xFlair - Nutmeg,<br>measured with data</div>
+    </div>
+    <div style="flex-shrink:0; text-align:right;">
+      <div class="t-label" style="margin-bottom:5px;">Pages</div>
+      <div style="font-family:var(--serif); font-size:18px; color:var(--p2);">08 — 10</div>
+    </div>
+  </div>
+
+  <div style="padding: 24px 48px;">
+    <div class="row gap-20" style="margin-bottom:20px;">
+      <div style="flex:3;">
+        <div class="t-label" style="margin-bottom:8px; color:var(--p2);">Problem Statement</div>
+        <div class="t-body" style="margin-bottom:10px;">
+          A nutmeg, passing the ball between an opponent's legs, is not a high-level skill move. Any player can do it. But only a small fraction choose to do it under match pressure. That is what makes it interesting: it is not a performance indicator, but rather a signal of <em>boldness</em> and <em>flair</em> that is purely for entertainment.
+        </div>
+        <div class="t-body">
+          Sports media, fantasy sports platforms, and the broadcast industry have no systematic way to measure this. The question of this project is <strong style="font-weight:600;">whether we can predict how many times a player will attempt a nutmeg before the match even starts?</strong>
+        </div>
+      </div>
+      <div style="flex:2;">
+        <div class="t-label" style="margin-bottom:8px; color:var(--p2);">Business Value</div>
+        <div class="row gap-8" style="flex-wrap:wrap;">
+          <div class="metric-box" style="flex:1; min-width:80px; border-top:2px solid var(--p2);">
+            <div class="metric-num" style="color:var(--p2);">522K</div>
+            <div class="metric-label">Events Processed</div>
+          </div>
+          <div class="metric-box" style="flex:1; min-width:80px; border-top:2px solid var(--p2);">
+            <div class="metric-num" style="color:var(--p2);">27.9%</div>
+            <div class="metric-label">MAE Improvement</div>
+          </div>
+        </div>
+        <div style="height:8px;"></div>
+        <div class="metric-box" style="border-top:2px solid var(--p2);">
+          <div class="t-body" style="font-size:8px; color:var(--p2-mid); font-weight:500;">Use case: fan engagement & broadcast</div>
+          <div class="t-body" style="font-size:8px; margin-top:2px;">Players with a high predicted nutmeg rate are highly sellable content for pre-match narratives, fantasy sports, or exotic betting markets.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pipeline -->
+    <div class="t-label" style="margin-bottom:10px; color:var(--p2);">Pipeline Architecture</div>
+    <div class="flow" style="margin-bottom:20px;">
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p2-light); border-color:var(--p2-mid);">
+          <div class="flow-title" style="color:var(--p2);">StatsBomb API</div>
+          <div class="flow-sub" style="color:var(--p2);">Data Source</div>
+          <div class="flow-sub" style="margin-top:4px;">3 tournaments<br>WC22 · Euro24<br>Copa24</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p2-light); border-color:var(--p2-mid);">
+          <div class="flow-title" style="color:var(--p2);">Event Filtering</div>
+          <div class="flow-sub" style="color:var(--p2);">4,027 dribbles</div>
+          <div class="flow-sub" style="margin-top:4px;">354 nutmegs<br>Flair positions<br>≥5 attempts</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p2-light); border-color:var(--p2-mid);">
+          <div class="flow-title" style="color:var(--p2);">Feature Eng.</div>
+          <div class="flow-sub" style="color:var(--p2);">Player-Match</div>
+          <div class="flow-sub" style="margin-top:4px;">Rolling shift(1)<br>664 rows<br>6 features</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p2-light); border-color:var(--p2-mid);">
+          <div class="flow-title" style="color:var(--p2);">XGBoost</div>
+          <div class="flow-sub" style="color:var(--p2);">Time-series split</div>
+          <div class="flow-sub" style="margin-top:4px;">MAE 0.306<br>vs baseline 0.424<br>No leakage</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-box" style="background:var(--p2-light); border-color:var(--p2-mid);">
+          <div class="flow-title" style="color:var(--p2);">xFlair App</div>
+          <div class="flow-sub" style="color:var(--p2);">Streamlit</div>
+          <div class="flow-sub" style="margin-top:4px;">Dashboard<br>Player Lab<br>Model Integrity</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="thin">
+
+    <div class="row gap-12">
+      <div class="card" style="flex:1; border-top:2px solid var(--p2);">
+        <div class="t-body-m" style="margin-bottom:4px;">Why Nutmeg?</div>
+        <div class="t-body">Precisely because a nutmeg is not a performance indicator, it becomes an interesting proxy for flair. It is purely about boldness and creativity in a 1v1 moment. From an analytical perspective, predicting an event that is "unnecessary but chosen" is much harder than predicting an event that is actually planned.</div>
+      </div>
+      <div class="card" style="flex:1; border-top:2px solid var(--p2);">
+        <div class="t-body-m" style="margin-bottom:4px;">Model Integrity Page</div>
+        <div class="t-body">Not many portfolios transparently display their model limitations. xFlair has a dedicated page for a decile calibration chart and error analysis, building trust rather than hiding weaknesses.</div>
+      </div>
+      <div class="card" style="flex:1; border-top:2px solid var(--p2);">
+        <div class="t-body-m" style="margin-bottom:4px;">Target Audience</div>
+        <div class="t-body">Sports media analysts, fantasy sports platforms, and the broadcast industry. A nutmeg is an entertainment event, and this project attempts to measure something that has previously only lived in highlight reels.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">8 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 9 — PROJECT 2: TAUTOLOGY & SOLUTION
+     ============================================================ -->
+<div class="page" id="p9">
+  <div style="height:4px; background: var(--p2);"></div>
+  <div style="padding: 28px 48px;">
+    <div class="t-label" style="margin-bottom:4px; color:var(--p2);">Project 02 — Technical Challenge</div>
+    <div class="t-h2" style="margin-bottom:20px;">Finding &amp; solving<br>Mathematical Tautology</div>
+
+    <div class="row gap-20">
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p2);">The Tautology Problem</div>
+
+        <div class="card" style="background:#FCEBEB; border:0.5px solid #F7C1C1; margin-bottom:14px;">
+          <div class="t-body-m" style="margin-bottom:4px; color:#A32D2D;">First Iteration - It looked successful.</div>
+          <div class="t-body" style="color:var(--ink-2);">The first model with player-level aggregation produced a very low MAE. The predictions looked perfect; all players received a score around 0.71.</div>
+          <div class="t-body" style="margin-top:6px; color:var(--ink-2);">This was a red flag. After investigation, it was found that the target variable could be mathematically derived from two features:</div>
+          <div style="margin-top:8px; padding:8px 10px; background:rgba(255,255,255,0.5); border-radius:4px;">
+            <code style="font-size:8px; color:#A32D2D;">y = nutmegs / total_dribbles = f(feature_1 / feature_2)</code>
+          </div>
+          <div class="t-body" style="margin-top:6px; color:var(--ink-3);">The model was not learning patterns; it was just doing arithmetic. This was a mathematical tautology.</div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p2);">Redesign: Player-Match Formulation</div>
+
+        <div style="display:flex; gap:10px; margin-bottom:14px; align-items:stretch;">
+          <div class="card" style="flex:1; background:var(--paper-3); opacity:0.8;">
+            <div class="t-label" style="font-size:7px; margin-bottom:6px; color:#A32D2D;">Before (Player-Level)</div>
+            <div class="t-body" style="font-size:7.5px;">Each row = one player</div>
+            <div class="t-body" style="font-size:7.5px; margin-top:3px;">Target = career nutmeg rate</div>
+            <div class="t-body" style="font-size:7.5px; margin-top:3px;">Feature = career stats</div>
+            <div class="t-body" style="font-size:7.5px; margin-top:3px; color:#A32D2D; font-weight:600;">Problem: y = f(x₁/x₂)</div>
+          </div>
+          <div style="display:flex; align-items:center; font-size:16px; color:var(--p2);">→</div>
+          <div class="card" style="flex:1; background:var(--p2-light); border:0.5px solid var(--p2-mid);">
+            <div class="t-label" style="font-size:7px; margin-bottom:6px; color:var(--p2);">After (Player-Match)</div>
+            <div class="t-body" style="font-size:7.5px;">Each row = one match</div>
+            <div class="t-body" style="font-size:7.5px; margin-top:3px;">Target = nutmeg in match T</div>
+            <div class="t-body" style="font-size:7.5px; margin-top:3px;">Feature = data before match T</div>
+            <div class="t-body" style="font-size:7.5px; margin-top:3px; color:var(--p2); font-weight:600;">Solution:: Predict the future from the past</div>
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p2);">shift(1) — Time-Series Integrity</div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="t-body" style="margin-bottom:6px;">Rolling features use <code style="font-size:7.5px; background:var(--paper-2); padding:1px 4px; border-radius:2px;">shift(1)</code> — meaning each row only uses information from previous matches, not the match being predicted.</div>
+          <div style="padding:8px 10px; background:var(--paper-2); border-radius:4px; margin-bottom:6px;">
+            <code style="font-size:7.5px; color:var(--p2);">rolling_nutmeg_rate_last5 = shift(1).rolling(5).mean()</code>
+          </div>
+          <div class="t-body" style="font-size:7.5px; color:var(--ink-3);">First match for each player: rolling feature equals 0 (no prior history). This is methodologically honest.</div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p2);">Features Used</div>
+        <table class="model-table" style="margin-bottom:14px;">
+          <thead>
+            <tr><th>Feature</th><th>Description</th><th>Source</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight:500;">career_nutmeg_rate</td><td>Nutmeg / total dribble historical</td><td>Rolling</td></tr>
+            <tr><td style="font-weight:500;">rolling_nutmeg_rate_last5</td><td>Average of last 5 matches</td><td>shift(1)</td></tr>
+            <tr><td style="font-weight:500;">rolling_dribbles_last5</td><td>Exposure / past opportunity</td><td>shift(1)</td></tr>
+            <tr><td style="font-weight:500;">opponent_duel_win_rate</td><td>Opponent defensive strength</td><td>StatsBomb</td></tr>
+            <tr><td style="font-weight:500;">career_dribble_success</td><td>General dribbling skill</td><td>Aggregation</td></tr>
+            <tr><td style="font-weight:500;">match_number</td><td>Experience in this tournament</td><td>Derived</td></tr>
+          </tbody>
+        </table>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p2);">Model Result</div>
+        <div class="row gap-8" style="margin-bottom:14px;">
+          <div class="metric-box" style="flex:1; border-top:2px solid var(--p2);">
+            <div class="metric-num" style="color:var(--p2);">0.306</div>
+            <div class="metric-label">MAE (Model)</div>
+          </div>
+          <div class="metric-box" style="flex:1;">
+            <div class="metric-num" style="color:var(--ink-3);">0.424</div>
+            <div class="metric-label">MAE (Baseline)</div>
+          </div>
+          <div class="metric-box" style="flex:1; border-top:2px solid var(--p2);">
+            <div class="metric-num" style="color:var(--p2);">27.9%</div>
+            <div class="metric-label">Improvement</div>
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p2);">Time-Series Split — Methodological Integrity</div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="t-body" style="margin-bottom:6px;">Random splitting is forbidden for time-series data. Leaking future data into the training set is one of the most dangerous forms of data leakage.</div>
+          <div style="display:flex; gap:8px; margin-top:8px;">
+            <div style="flex:2; padding:8px; background:var(--p2-light); border-radius:4px; text-align:center;">
+              <div class="t-body" style="font-size:8px; font-weight:600; color:var(--p2);">Train Set</div>
+              <div class="t-body" style="font-size:7.5px; color:var(--p2);">≤ June 30, 2024</div>
+            </div>
+            <div style="display:flex; align-items:center; color:var(--p2); font-size:12px;">→</div>
+            <div style="flex:1; padding:8px; background:var(--paper-3); border-radius:4px; text-align:center;">
+              <div class="t-body" style="font-size:8px; font-weight:600;">Test Set</div>
+              <div class="t-body" style="font-size:7.5px;">July 1–15, 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background:var(--p2-light); border:0.5px solid var(--p2-mid);">
+          <div class="t-body-m" style="margin-bottom:4px; color:var(--p2); font-size:8.5px;">Design Decision</div>
+          <div class="t-body" style="font-size:8px; font-style:italic; line-height:1.8;">
+            "Results that are too good are a danger sign, not a success. Perfect results must be investigated further, not immediately celebrated."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">9 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 10 — PROJECT 2: DASHBOARD & RESULTS
+     ============================================================ -->
+<div class="page" id="p10">
+  <div style="height:4px; background: var(--p2);"></div>
+  <div style="padding: 28px 48px;">
+    <div class="t-label" style="margin-bottom:4px; color:var(--p2);">Project 02 — Dashboard & Results</div>
+    <div class="t-h2" style="margin-bottom:20px;">The Flair Index - from event data<br>to per-player predictions</div>
+
+    <div class="row gap-20">
+      <div style="flex:1;">
+        <!-- Flair index mockup -->
+        <div class="t-label" style="margin-bottom:8px; color:var(--p2);">The Flair Index — Top Player Ranking</div>
+        <div class="card" style="margin-bottom:14px; padding:10px 12px;">
+          <div class="t-label" style="margin-bottom:8px; font-size:6.5px;">Expected Nutmeg / Match · WC 2026 Prediction</div>
+          <!-- player bars mockup -->
+          <div style="margin-bottom:5px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+              <div class="t-body" style="font-size:8px; font-weight:500;">Neymar Jr.</div>
+              <div class="t-body" style="font-size:8px; color:var(--p2);">0.87 predicted</div>
+            </div>
+            <div style="height:8px; background:var(--paper-3); border-radius:4px; overflow:hidden;">
+              <div style="width:87%; height:100%; background:var(--p2); border-radius:4px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:5px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+              <div class="t-body" style="font-size:8px; font-weight:500;">Richarlison</div>
+              <div class="t-body" style="font-size:8px; color:var(--p2);">0.72 predicted</div>
+            </div>
+            <div style="height:8px; background:var(--paper-3); border-radius:4px; overflow:hidden;">
+              <div style="width:72%; height:100%; background:var(--p2); border-radius:4px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:5px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+              <div class="t-body" style="font-size:8px; font-weight:500;">Vinícius Jr.</div>
+              <div class="t-body" style="font-size:8px; color:var(--p2);">0.65 predicted</div>
+            </div>
+            <div style="height:8px; background:var(--paper-3); border-radius:4px; overflow:hidden;">
+              <div style="width:65%; height:100%; background:var(--p2); border-radius:4px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:5px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+              <div class="t-body" style="font-size:8px; font-weight:500;">Mbappé</div>
+              <div class="t-body" style="font-size:8px; color:var(--p2);">0.58 predicted</div>
+            </div>
+            <div style="height:8px; background:var(--paper-3); border-radius:4px; overflow:hidden;">
+              <div style="width:58%; height:100%; background:var(--p2-mid); border-radius:4px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:5px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+              <div class="t-body" style="font-size:8px; font-weight:500;">Salah</div>
+              <div class="t-body" style="font-size:8px; color:var(--ink-3);">0.43 predicted</div>
+            </div>
+            <div style="height:8px; background:var(--paper-3); border-radius:4px; overflow:hidden;">
+              <div style="width:43%; height:100%; background:var(--paper-3); border:0.5px solid var(--p2-mid); border-radius:4px;"></div>
+            </div>
+          </div>
+          <div class="t-small" style="margin-top:8px; color:var(--ink-4);">*Player names are illustrative for format demonstration.</div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:8px; color:var(--p2);">Model Integrity - Active Transparency</div>
+        <div class="card" style="background:var(--p2-light); border:0.5px solid var(--p2-mid);">
+          <div class="t-body-m" style="margin-bottom:4px; color:var(--p2); font-size:8.5px;">Main Differentiator of This Project</div>
+          <div class="t-body" style="font-size:8px;">The Model Integrity page explicitly displays:</div>
+          <div class="t-body" style="font-size:8px; margin-top:4px;">1. Decile calibration chart (predicted vs actual)</div>
+          <div class="t-body" style="font-size:8px;">2. Error analysis per player</div>
+          <div class="t-body" style="font-size:8px;">3. Dataset Limitations(only 3 tournaments)</div>
+          <div class="t-body" style="font-size:8px; margin-top:6px; font-style:italic; color:var(--p2);">"Transparency builds trust that cannot be built even with high accuracy."</div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p2);">Project Summary</div>
+        <div class="card" style="background:var(--p2-light); border:0.5px solid var(--p2-mid); margin-bottom:14px;">
+          <div class="t-body" style="font-size:8.5px; line-height:1.8; font-style:italic; color:var(--p2);">
+            "Built end-to-end sports analytics ML pipeline predicting nutmeg frequency for WC 2026 flair players using XGBoost on 522,885 StatsBomb events; achieved 27.9% MAE improvement over baseline with zero data leakage via Player-Match time-series formulation."
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p2);">Key Learnings</div>
+        <div class="decision-block" style="border-color:var(--p2);">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">Data granularity determines model validity</div>
+          <div class="t-body">Player-level aggregation looks simpler, but it results in tautology. The Player-Match formulation is more complex, but it is the only methodologically valid way for time-series prediction.</div>
+        </div>
+        <div class="decision-block" style="border-color:var(--p2);">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">A small dataset is not a roadblock, but a design challenge</div>
+          <div class="t-body">664 rows is a very small dataset for ML. The solution is not more data (since data is limited), but stricter regularization and more informative features.</div>
+        </div>
+        <div class="decision-block" style="border-color:var(--p2); margin-bottom:14px;">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">Acknowledged limitations build greater trust</div>
+          <div class="t-body">he Model Integrity page actually makes this project more convincing. Displaying weaknesses openly shows that I understand the model's limitations, not just how to build it.</div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:8px; color:var(--p2);">Limitations & Development</div>
+        <div class="t-body" style="font-size:8px; margin-bottom:4px;">• Currently only covers 3 international tournaments; domestic league data has not been used</div>
+        <div class="t-body" style="font-size:8px; margin-bottom:4px;">• Players without history in these 3 competitions cannot yet be predicted.</div>
+        <div class="t-body" style="font-size:8px; margin-bottom:14px;">• Dataset of 664 rows (currently being developed by expanding data coverage to further validate results)</div>
+
+        <div class="t-label" style="margin-bottom:8px; color:var(--p2);">Link</div>
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">
+          GitHub: <a href="https://github.com/val-Antonius/xflair.git" target="_blank" style="font-size:7.5px; background:var(--paper-2); padding:1px 5px; border-radius:2px; font-family:monospace; color:inherit; text-decoration:none;">github.com/val-Antonius/xflair</a>
+          </div>
+        <div class="t-body" style="font-size:8px;">
+          Demo App: <a href="https://xflair.streamlit.app/" target="_blank" style="font-size:7.5px; background:var(--paper-2); padding:1px 5px; border-radius:2px; font-family:monospace; color:inherit; text-decoration:none;">xflair.streamlit.app</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">10 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 11 — PROJECT 3: OVERVIEW
+     ============================================================ -->
+<div class="page" id="p11">
+  <div class="proj-band" style="border-left: 4px solid var(--p3);">
+    <div class="proj-band-num" style="color: var(--p3);">03</div>
+    <div class="proj-band-content">
+      <div class="proj-band-label" style="color: var(--p3);">Project 03 — Full-Stack · Business Intelligence</div>
+      <div class="t-h1">WHSER - From manual operations<br>to a controlled system</div>
+    </div>
+    <div style="flex-shrink:0; text-align:right;">
+      <div class="t-label" style="margin-bottom:5px;">Pages</div>
+      <div style="font-family:var(--serif); font-size:18px; color:var(--p3);">11 — 13</div>
+    </div>
+  </div>
+
+  <div style="padding: 24px 48px;">
+    <div class="row gap-20" style="margin-bottom:20px;">
+      <div style="flex:3;">
+        <div class="t-label" style="margin-bottom:8px; color:var(--p3);">Problem Statement</div>
+        <div class="t-body" style="margin-bottom:10px;">
+          High-volume laundry businesses rely on spreadsheets, handwritten notes, and phone calls. As a result: orders are lost, SLAs are violated without early detection, inventory is mismanaged, and owners lack visibility into profitability per service type.
+        </div>
+        <div class="t-body">
+          WHSER transforms laundry operations from unstructured manual workflows into a controlled, proactive system through a <strong style="font-weight:600;">dual-layer architecture</strong>: an operational layer for day-to-day staff workflows, and an analytics layer for the owner's strategic decisions.
+        </div>
+      </div>
+      <div style="flex:2;">
+        <div class="t-label" style="margin-bottom:8px; color:var(--p3);">Business Impact</div>
+        <div class="row gap-8" style="flex-wrap:wrap;">
+          <div class="metric-box" style="flex:1; min-width:80px; border-top:2px solid var(--p3);">
+            <div class="metric-num" style="color:var(--p3);">100%</div>
+            <div class="metric-label">Order Tracked</div>
+          </div>
+          <div class="metric-box" style="flex:1; min-width:80px; border-top:2px solid var(--p3);">
+            <div class="metric-num" style="color:var(--p3);">30h</div>
+            <div class="metric-label">Saved / Week</div>
+          </div>
+        </div>
+        <div style="height:8px;"></div>
+        <div class="row gap-8">
+          <div class="metric-box" style="flex:1; border-top:2px solid var(--p3);">
+            <div class="metric-num" style="color:var(--p3);">20</div>
+            <div class="metric-label">Database Tables</div>
+          </div>
+          <div class="metric-box" style="flex:1; border-top:2px solid var(--p3);">
+            <div class="metric-num" style="color:var(--p3);">50+</div>
+            <div class="metric-label">API Endpoints</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- dual layer architecture -->
+    <div class="t-label" style="margin-bottom:10px; color:var(--p3);">Dual-Layer Architecture</div>
+    <div class="row gap-12" style="margin-bottom:20px;">
+      <div style="flex:1; border: 0.5px solid var(--border); border-radius:8px; overflow:hidden;">
+        <div style="background:var(--p3-light); padding:10px 14px; border-bottom:0.5px solid var(--border);">
+          <div class="t-body-m" style="color:var(--p3); font-size:9px;">Operational Layer</div>
+          <div class="t-small">Real-time · Staff / Admin</div>
+        </div>
+        <div style="padding:10px 14px;">
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">• POS — Input order, pricing, receipt</div>
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">• Workflow engine — State machine 12 status</div>
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">• Inventory tracking — Consumption per orderr</div>
+          <div class="t-body" style="font-size:8px;">• Exception logging — Rewash, damage, loss</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--p3); font-size:18px;">⇄</div>
+      <div style="flex:1; border: 0.5px solid var(--border); border-radius:8px; overflow:hidden;">
+        <div style="background:var(--p3-light); padding:10px 14px; border-bottom:0.5px solid var(--border);">
+          <div class="t-body-m" style="color:var(--p3); font-size:9px;">Analytical Layer</div>
+          <div class="t-small">Post-facto · Owner</div>
+        </div>
+        <div style="padding:10px 14px;">
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">• Data snapshot — Period data is frozen</div>
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">• 8 KPIs — Calculated automatically + baseline</div>
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">• Insight — Owner manual interpretation</div>
+          <div class="t-body" style="font-size:8px;">• LLM reco. — Gemma 3 4B via Ollama</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--p3); font-size:18px;">→</div>
+      <div style="flex:1; border: 0.5px solid var(--border); border-radius:8px; overflow:hidden;">
+        <div style="background:var(--paper-2); padding:10px 14px; border-bottom:0.5px solid var(--border);">
+          <div class="t-body-m" style="font-size:9px;">MySQL Database</div>
+          <div class="t-small">20 tables · 3 zones</div>
+        </div>
+        <div style="padding:10px 14px;">
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">Operational zone</div>
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">Analytical zone</div>
+          <div class="t-body" style="font-size:8px;">Audit zone</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="thin">
+
+    <div class="row gap-12">
+      <div class="card" style="flex:1; border-top:2px solid var(--p3);">
+        <div class="t-body-m" style="margin-bottom:4px;">Order as the Single Source of Truth</div>
+        <div class="t-body">All data (items, status history, exceptions, inventory consumption) is linked to a single entity: the orders table. Every status change is immutably recorded in the order_status_log.</div>
+      </div>
+      <div class="card" style="flex:1; border-top:2px solid var(--p3);">
+        <div class="t-body-m" style="margin-bottom:4px;">Immutable Snapshot for Financials</div>
+        <div class="t-body">nalytical data is frozen at the period boundary, so a January report will not change even if data is updated in February. This is crucial for financial audit consistency and historical decision-making.</div>
+      </div>
+      <div class="card" style="flex:1; border-top:2px solid var(--p3);">
+        <div class="t-body-m" style="margin-bottom:4px;">LLM as Augmentation, Not Automation</div>
+        <div class="t-body">Recommendations from Gemma 3 require owner approval before execution. This human-in-the-loop approach ensures business decisions remain in the right hands.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">11 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 12 — PROJECT 3: DATA PIPELINE & KPI
+     ============================================================ -->
+<div class="page" id="p12">
+  <div style="height:4px; background: var(--p3);"></div>
+  <div style="padding: 28px 48px;">
+    <div class="t-label" style="margin-bottom:4px; color:var(--p3);">Project 03 — ANALYTICAL ARCHITECTURE & TECHNICAL DECISIONS</div>
+    <div class="t-h2" style="margin-bottom:20px;">From transaction events<br>to strategic decisions</div>
+
+    <!-- insight pipeline -->
+    <div class="t-label" style="margin-bottom:10px; color:var(--p3);">Pipeline: Raw Data → Insight</div>
+    <div style="display:flex; align-items:stretch; gap:4px; margin-bottom:20px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:80px; text-align:center;">
+        <div style="background:var(--paper-2); border:0.5px solid var(--border); border-radius:6px; padding:8px 4px; height:60px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <div class="t-body" style="font-size:7.5px; font-weight:600; color:var(--p3);">Order Event</div>
+          <div class="t-body" style="font-size:7px; color:var(--ink-3);">Staff input</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--ink-4); font-size:10px;">→</div>
+      <div style="flex:1; min-width:80px; text-align:center;">
+        <div style="background:var(--paper-2); border:0.5px solid var(--border); border-radius:6px; padding:8px 4px; height:60px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <div class="t-body" style="font-size:7.5px; font-weight:600; color:var(--p3);">Snapshot</div>
+          <div class="t-body" style="font-size:7px; color:var(--ink-3);">Data frozen</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--ink-4); font-size:10px;">→</div>
+      <div style="flex:1; min-width:80px; text-align:center;">
+        <div style="background:var(--p3-light); border:0.5px solid var(--p3-mid); border-radius:6px; padding:8px 4px; height:60px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <div class="t-body" style="font-size:7.5px; font-weight:600; color:var(--p3);">8 KPIs</div>
+          <div class="t-body" style="font-size:7px; color:var(--p3);">+ baseline</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--ink-4); font-size:10px;">→</div>
+      <div style="flex:1; min-width:80px; text-align:center;">
+        <div style="background:var(--paper-2); border:0.5px solid var(--border); border-radius:6px; padding:8px 4px; height:60px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <div class="t-body" style="font-size:7.5px; font-weight:600; color:var(--p3);">Insight</div>
+          <div class="t-body" style="font-size:7px; color:var(--ink-3);">Owner analyzes </div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--ink-4); font-size:10px;">→</div>
+      <div style="flex:1; min-width:80px; text-align:center;">
+        <div style="background:var(--paper-2); border:0.5px solid var(--border); border-radius:6px; padding:8px 4px; height:60px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <div class="t-body" style="font-size:7.5px; font-weight:600; color:var(--p3);">LLM Reco.</div>
+          <div class="t-body" style="font-size:7px; color:var(--ink-3);">Gemma 3 4B</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; color:var(--ink-4); font-size:10px;">→</div>
+      <div style="flex:1; min-width:80px; text-align:center;">
+        <div style="background:var(--paper-2); border:0.5px solid var(--border); border-radius:6px; padding:8px 4px; height:60px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <div class="t-body" style="font-size:7.5px; font-weight:600; color:var(--p3);">Task</div>
+          <div class="t-body" style="font-size:7px; color:var(--ink-3);">Owner approves</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gap-20">
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p3);">8 Calculated KPIs</div>
+        <table class="kpi-table">
+          <thead>
+            <tr><th>KPI</th><th>Short Formula</th><th>Target</th><th>Significance</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:500;">SLA Compliance</td>
+              <td>on_time / total_completed</td>
+              <td>&gt;95%</td>
+              <td><span class="sig-badge sig-normal">Normal</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;">Rewash Rate</td>
+              <td>rewashes / completed</td>
+              <td>&lt;5%</td>
+              <td><span class="sig-badge sig-attn">Attention</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;">Exception Freq.</td>
+              <td>exceptions / total orders</td>
+              <td>&lt;2%</td>
+              <td><span class="sig-badge sig-crit">Critical</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;">Contribution Margin</td>
+              <td>revenue − material − labor</td>
+              <td>&gt;70%</td>
+              <td><span class="sig-badge sig-normal">Normal</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;">Inventory Variance</td>
+              <td>(actual − expected) / expected</td>
+              <td>&lt;10%</td>
+              <td><span class="sig-badge sig-attn">Attention</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;">Aging Distribution</td>
+              <td>count(&gt;72h) / total</td>
+              <td>&lt;10%</td>
+              <td><span class="sig-badge sig-normal">Normal</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;">Productivity</td>
+              <td>completed / days_in_period</td>
+              <td>Baseline</td>
+              <td><span class="sig-badge sig-normal">Normal</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500;">Capacity Utilization</td>
+              <td>peak_concurrent / capacity</td>
+              <td>60–80%</td>
+              <td><span class="sig-badge sig-normal">Normal</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p3);">Critical Technical Decisions</div>
+
+        <div class="decision-block" style="border-color:var(--p3);">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">Separation of Operationa &amp; Analytical</div>
+          <div class="t-body">Analytical queries running on live data cause database lock contention and slow down transactions. Snapshots separate this load: transactions remain fast, and analytics do not compete with the POS</div>
+        </div>
+
+        <div class="decision-block" style="border-color:var(--p3);">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">Manual Snapshot, Not Automated</div>
+          <div class="t-body">The owner decides when to analyze (weekly, monthly, or ad-hoc). Automated snapshots would create too much unused data. Agency remains in the hands of the business owner.</div>
+        </div>
+
+        <div class="decision-block" style="border-color:var(--p3);">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">MySQL Without ORM</div>
+          <div class="t-body">Prepared statements provide full control over queries, better performance for prototypes, and built-in prevention of SQL injection. An ORM adds unnecessary abstraction at this phase.</div>
+        </div>
+
+        <div class="decision-block" style="border-color:var(--p3); margin-bottom:14px;">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">Role-Based Dual Dashboard</div>
+          <div class="t-body">Admins see real-time workflows. Owners see strategic trends. A single dashboard trying to serve both can create cognitive overload, making two dashboards with different contexts the more appropriate choice.</div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:8px; color:var(--p3);">Tech Stack</div>
+        <div class="row gap-6" style="flex-wrap:wrap; gap:8px;">
+          <span class="tag" style="background:var(--p3-light); color:var(--p3);">Next.js 14</span>
+          <span class="tag" style="background:var(--p3-light); color:var(--p3);">TypeScript</span>
+          <span class="tag" style="background:var(--p3-light); color:var(--p3);">MySQL</span>
+          <span class="tag" style="background:var(--p3-light); color:var(--p3);">Ollama</span>
+          <span class="tag" style="background:var(--p3-light); color:var(--p3);">Gemma 3 4B</span>
+          <span class="tag" style="background:var(--p3-light); color:var(--p3);">jsPDF</span>
+          <span class="tag" style="background:var(--p3-light); color:var(--p3);">React</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">12 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 13 — PROJECT 3: LLM & LEARNINGS
+     ============================================================ -->
+<div class="page" id="p13">
+  <div style="height:4px; background: var(--p3);"></div>
+  <div style="padding: 28px 48px;">
+    <div class="t-label" style="margin-bottom:4px; color:var(--p3);">Project 03 — Learnings & Takeaways</div>
+    <div class="t-h2" style="margin-bottom:20px;">Systems thinking<br>behind every design decision</div>
+
+    <div class="row gap-20">
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p3);">LLM Integration — Implementation Details</div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="t-body-m" style="margin-bottom:6px; font-size:8.5px;">Human-in-the-Loop Pipeline</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; gap:8px; align-items:flex-start;">
+              <div style="width:16px; height:16px; border-radius:50%; background:var(--p3-light); border:0.5px solid var(--p3); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                <span style="font-size:7px; font-weight:600; color:var(--p3);">1</span>
+              </div>
+              <div class="t-body" style="font-size:8px;">Owner notes insights from the KPI dashboard (human interpretation, not automated)</div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:flex-start;">
+              <div style="width:16px; height:16px; border-radius:50%; background:var(--p3-light); border:0.5px solid var(--p3); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                <span style="font-size:7px; font-weight:600; color:var(--p3);">2</span>
+              </div>
+              <div class="t-body" style="font-size:8px;">Gemma 3 reads insights + metrics to generate specific operational recommendations</div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:flex-start;">
+              <div style="width:16px; height:16px; border-radius:50%; background:var(--p3-light); border:0.5px solid var(--p3); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                <span style="font-size:7px; font-weight:600; color:var(--p3);">3</span>
+              </div>
+              <div class="t-body" style="font-size:8px;">Owner reviews &amp; approves relevant recommendations (human gate)</div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:flex-start;">
+              <div style="width:16px; height:16px; border-radius:50%; background:var(--p3-light); border:0.5px solid var(--p3); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                <span style="font-size:7px; font-weight:600; color:var(--p3);">4</span>
+              </div>
+              <div class="t-body" style="font-size:8px;">Tasks are created and assigned to staff, effectiveness is measured in the next snapshot</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p3);">Critical Learnings</div>
+        <div class="decision-block" style="border-color:var(--p3);">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">Good architecture solves business problems before technical problems</div>
+          <div class="t-body">The separation of operational and analytical layers was born from the understanding that owners and staff have fundamentally different information needs, not from technical preference.</div>
+        </div>
+        <div class="decision-block" style="border-color:var(--p3);">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">Immutability is a feature, not a limitation</div>
+          <div class="t-body">An unchangeable snapshot might look like a limitation at first. But in the context of financial audits and decision accountability, immutability is a requirement, not a trade-off.</div>
+        </div>
+        <div class="decision-block" style="border-color:var(--p3); margin-bottom:0;">
+          <div class="t-body-m" style="font-size:8.5px; margin-bottom:3px;">Manual-first is a choice, not a shortcoming</div>
+          <div class="t-body">Inventory consumption is manually input by staff, not via IoT sensors. This is not a budget limitation, but a design decision: the system must be deployable today, in any laundry, without specialized hardware.</div>
+        </div>
+      </div>
+
+      <div style="flex:1;">
+        <div class="t-label" style="margin-bottom:10px; color:var(--p3);">Project Summary</div>
+        <div class="card" style="background:var(--p3-light); border:0.5px solid var(--p3-mid); margin-bottom:14px;">
+          <div class="t-body" style="font-size:8.5px; line-height:1.8; font-style:italic; color:var(--p3);">
+            "Architected dual-layer laundry management system separating operational (real-time POS) from analytical (immutable snapshot-based analytics) concerns; computed 8 business KPIs with baseline comparison and significance detection; integrated local LLM (Gemma 3) for human-approved operational recommendations."
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:10px; color:var(--p3);">Decision Design</div>
+        <div class="card" style="border:0.5px solid var(--border); margin-bottom:14px;">
+          <div class="t-body-m" style="margin-bottom:6px; font-size:8.5px;">Choosing the right solution, not the most complex one:</div>
+          <div class="t-body" style="font-size:8px; line-height:1.8; font-style:italic;">
+            "I briefly considered real-time analytics with data streaming. It is technically more impressive. But after understanding the business needs, a laundry owner does not need real-time data every second. An immutable snapshot is the right answer"
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:8px; color:var(--p3);">Development Status</div>
+        <div class="card" style="margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; align-items:center;">
+            <div class="t-body" style="font-size:8px; font-weight:500;">Phase 1: Operational App</div>
+            <span class="sig-badge sig-normal">Completed</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; align-items:center;">
+            <div class="t-body" style="font-size:8px; font-weight:500;">Phase 2: Role-based Dashboards</div>
+            <span class="sig-badge sig-normal">Completed</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; align-items:center;">
+            <div class="t-body" style="font-size:8px; font-weight:500;">Phase 3: Analytics &amp; Snapshots</div>
+            <span class="sig-badge sig-normal">Completed</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; align-items:center;">
+            <div class="t-body" style="font-size:8px; font-weight:500;">Phase 4: LLM Integration</div>
+            <span class="sig-badge sig-normal">Completed</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="t-body" style="font-size:8px; font-weight:500;">Phase 5: Task Management</div>
+            <!-- <span class="sig-badge sig-attn">Schema Siap</span> -->
+            <span class="sig-badge sig-normal">Completed</span>
+          </div>
+        </div>
+
+        <div class="t-label" style="margin-bottom:8px; color:var(--p3);">Link</div>
+          <div class="t-body" style="font-size:8px; margin-bottom:4px;">
+            GitHub: <a href="https://github.com/val-Antonius/whser.git" target="_blank" style="font-size:7.5px; background:var(--paper-2); padding:1px 5px; border-radius:2px; font-family:monospace; color:inherit; text-decoration:none;">github.com/val-Antonius/whser</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-footer">13 / 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 14 — CLOSING
+     ============================================================ -->
+<div class="page" id="p14" style="background:var(--ink); display:flex; flex-direction:column; justify-content:space-between;">
+  <div style="padding: 48px 48px 0;">
+    <div style="height:1px; background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3)); margin-bottom:40px;"></div>
+    <div style="font-family:var(--serif); font-size:11px; color:#6b6b66; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:16px;">GLAD YOU MADE IT TO THE END.</div>
+    <div style="font-family:var(--serif); font-size:48px; line-height:1.05; color:#fafaf8; margin-bottom:20px;">
+      I'd love to discuss<br>
+      <span style="color:#888880; font-style:italic;">any of these projects further</span>
+    </div>
+    <div style="font-family:var(--sans); font-size:10px; font-weight:300; color:#6b6b66; max-width:360px; line-height:1.8; margin-bottom:40px;">
+      These three projects reflect how I approach problems: starting from a real business question, building solutions that can be explained, and making sure every technical decision has a reason behind it.
+    </div>
+
+    <div style="display:flex; gap:40px; flex-wrap:wrap;">
+    <div>
+      <div style="font-family:var(--sans); font-size:7.5px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#5a5a54; margin-bottom:6px;">Email</div>
+      <a href="mailto:thonybo6661@gmail.com" style="font-family:var(--sans); font-size:11px; color:#9a9a94; text-decoration:none;">thonybo6661@gmail.com</a>
+    </div>
+    <div>
+      <div style="font-family:var(--sans); font-size:7.5px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#5a5a54; margin-bottom:6px;">LinkedIn</div>
+      <a href="https://www.linkedin.com/in/antonius-valentino/" target="_blank" style="font-family:var(--sans); font-size:11px; color:#9a9a94; text-decoration:none;">linkedin.com/in/antonius-valentino</a>
+    </div>
+    <div>
+      <div style="font-family:var(--sans); font-size:7.5px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#5a5a54; margin-bottom:6px;">GitHub</div>
+      <a href="https://github.com/val-Antonius" target="_blank" style="font-family:var(--sans); font-size:11px; color:#9a9a94; text-decoration:none;">github.com/val-Antonius</a>
+    </div>
+    <div>
+      <div style="font-family:var(--sans); font-size:7.5px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#5a5a54; margin-bottom:6px;">Portfolio Web</div>
+      <a href="https://valantonius.me/" target="_blank" style="font-family:var(--sans); font-size:11px; color:#9a9a94; text-decoration:none;">valantonius.me</a>
+    </div>
+  </div>
+  </div>
+
+  <div style="padding: 0 48px 48px; display:flex; justify-content:space-between; align-items:flex-end;">
+    <div style="font-family:var(--sans); font-size:7.5px; color:#3d3d3a; letter-spacing:0.08em;">
+      Business Intelligence · Data Analyst<br>
+      Freshgraduate Sistem Informasi · 2026
+    </div>
+    <div style="font-family:var(--serif); font-size:80px; line-height:1; color:rgba(255,255,255,0.03);">14</div>
+  </div>
+</div>
+
+
+</body>
+</html>

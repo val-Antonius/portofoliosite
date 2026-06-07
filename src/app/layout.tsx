@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, JetBrains_Mono, DM_Sans } from "next/font/google";
-import CustomCursor from "@/components/ui/CustomCursor";
 import "./globals.css";
 
 const displayFont = DM_Serif_Display({
@@ -35,7 +34,6 @@ export default function RootLayout({
       className={`${displayFont.variable} ${monoFont.variable} ${sansFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-canvas text-primary">
-        <CustomCursor />
         {children}
       </body>
     </html>

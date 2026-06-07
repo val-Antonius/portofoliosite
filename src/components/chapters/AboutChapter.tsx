@@ -7,22 +7,21 @@ import SkillToken from "@/components/about/SkillToken";
 import MarginAnnotation from "@/components/about/MarginAnnotation";
 
 // ─── Skill → Project ID mapping ──────────────────────────────────────────────
-// Edit this map whenever projects change. One skill can reference many projects;
-// one project can be referenced by many skills — intentional cross-linking.
+// Reordered to reflect BI/Data Analyst positioning:
+// data stack first, web engineering as supporting capability.
 
 const SKILL_PROJECT_IDS: Record<string, string[]> = {
-  "JavaScript":          ["vision-plus"],
-  "TypeScript":          ["smart-dashboard"],
-  "Python":              ["scoring-credit"],
-  "SQL":                 ["vision-plus"],
-  "React":               ["smart-dashboard"],
-  "Node.js":             ["smart-dashboard"],
-  "REST API Design":     ["vision-plus", "smart-dashboard"],
-  "Figma":               ["sikumelawit"],
-  "System Architecture": ["sikumelawit"],
-  "Machine Learning":    ["scoring-credit"],
-  "XGBoost / SHAP":      ["scoring-credit"],
-  "IoT Integration":     ["sikumelawit"],
+  "Python": ["xflair-nutmeg-prediction", "credit-scoring-umkm"],
+  "SQL": ["whser-laundry-platform", "vision-plus"],
+  "XGBoost / SHAP": ["xflair-nutmeg-prediction", "credit-scoring-umkm"],
+  "Tableau": ["whser-laundry-platform"],
+  "Machine Learning": ["xflair-nutmeg-prediction", "credit-scoring-umkm"],
+  "TypeScript": ["whser-laundry-platform"],
+  "React": ["whser-laundry-platform"],
+  "REST API Design": ["vision-plus", "whser-laundry-platform"],
+  "System Architecture": ["sikumelawit", "vision-plus", "whser-laundry-platform"],
+  "IoT Integration": ["sikumelawit"],
+  "Figma": ["sikumelawit"],
 };
 
 type ProjectPreview = Pick<Project, "id" | "title" | "type" | "category">;
@@ -35,15 +34,11 @@ function resolveProjects(skillName: string): ProjectPreview[] {
     .map(({ id, title, type, category }) => ({ id, title, type, category }));
 }
 
-/** Convenience wrapper so inline JSX stays readable */
 function T({ n }: { n: string }) {
   return <SkillToken name={n} projects={resolveProjects(n)} />;
 }
 
 // ─── Mobile-only inline annotation chip ──────────────────────────────────────
-// Replaces the right-column margin notes on small screens.
-// Appears below each section, styled like a border-l comment to echo the
-// pull-quote aesthetic and preserve the "annotated document" identity.
 
 function MobileAnnotation({ notes }: { notes: Array<{ label: string; text: string }> }) {
   return (
@@ -69,14 +64,14 @@ const stagger = {
 
 const fadeUp = {
   hidden: { opacity: 0, y: 14 },
-  show:  { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" as const } },
 } as const;
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function AboutChapter() {
   return (
-    <div className="px-4 md:px-12 pt-8 md:pt-12 pb-16 md:pb-28">
+    <div className="h-full overflow-y-auto hidden-scrollbar px-4 md:px-12 pt-8 md:pt-12 pb-16 md:pb-28">
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -93,7 +88,7 @@ export default function AboutChapter() {
             Field Notes — Antonius Valentino
           </span>
           <span className="font-mono text-[9px] md:text-[10px] uppercase tracking-widest text-secondary">
-            REV 15
+            REV 16
           </span>
         </motion.div>
 
@@ -102,7 +97,6 @@ export default function AboutChapter() {
 
           {/* ════════════════════════════════════════════════════════════════
               LEFT COLUMN — Main Manuscript
-              Desktop: ~75% width | Mobile: full width
               ════════════════════════════════════════════════════════════════ */}
           <motion.div
             variants={stagger}
@@ -111,7 +105,6 @@ export default function AboutChapter() {
 
             {/* ── § 01 · THE AXIOM ──────────────────────────────────────── */}
             <motion.section variants={fadeUp}>
-              {/* Section label */}
               <div className="flex items-baseline gap-2 mb-4 md:mb-5">
                 <span className="font-mono text-[9px] md:text-[10px] tracking-widest text-secondary">01</span>
                 <span className="font-mono text-[9px] md:text-[10px] tracking-widest text-amber uppercase">
@@ -119,31 +112,27 @@ export default function AboutChapter() {
                 </span>
               </div>
 
-              {/* === EDITABLE: Main paragraph for § 01 ===
-                  Change the body text here whenever the methodology narrative needs updating. */}
               <p className="text-primary/80 leading-relaxed text-[14px] md:text-[15px] mb-5 md:mb-6">
-                Every application starts as chaos — messy requirements, competing
-                priorities, and business logic that evolves faster than the
-                documentation. My approach is to treat that entropy as a design
-                input, not an obstacle. I isolate the complexity early, build
-                strict data contracts at the boundaries, and write components that
-                don't complain when the underlying model changes. Order imposed at
-                the contract layer makes everything downstream predictable.
+                <span className="text-amber font-semibold">Data is only as useful as the decision it enables.</span> My instinct,
+                built across every project I have worked on, is that <span className="text-amber font-semibold">most analysis
+                fails not at the technical layer — but at the last mile</span>: when a
+                finding cannot be explained to the person who needs to act on it,
+                it stops being analysis and becomes noise. I build toward that last
+                mile from the first line. Every model I train, every dashboard I
+                design, is held to one question: <span className="text-amber font-semibold">can the person who needs this
+                actually use it?</span>
               </p>
 
-              {/* === EDITABLE: Pull-quote for § 01 ===
-                  This is the accent annotation that punctuates the main argument. */}
               <div className="ml-3 md:ml-5 pl-4 md:pl-5 border-l-2 border-amber/25">
                 <p className="text-primary/45 italic text-[12px] md:text-[13px] leading-relaxed font-display">
-                  "A system is only as good as its foundational constraints —
-                  the rest is execution detail."
+                  "An insight that cannot be explained to its audience has not yet
+                  been finished."
                 </p>
               </div>
 
-              {/* Mobile-only: inline annotation notes for this section */}
               <MobileAnnotation notes={[
-                { label: "perf",   text: "speed is a feature, not a checkbox" },
-                { label: "pred",   text: "predictable > clever, always" },
+                { label: "north star", text: "decisions, not dashboards" },
+                { label: "last mile", text: "explainability is not optional" },
               ]} />
             </motion.section>
 
@@ -156,49 +145,39 @@ export default function AboutChapter() {
                 </span>
               </div>
 
-              {/* Narrative paragraphs with inline SkillTokens */}
               <div className="space-y-4 md:space-y-5 text-primary/80 leading-relaxed text-[14px] md:text-[15px]">
 
-                {/* Web layer paragraph */}
+                {/* Data layer paragraph */}
                 <div>
-                  For the web layer, I work primarily with <T n="JavaScript" /> for
-                  raw flexibility and <T n="TypeScript" /> when team-scale type
-                  contracts matter — the compiler as a forcing function for clear
-                  thinking. <T n="React" /> handles the composable view layer;{" "}
-                  <T n="Node.js" /> paired with <T n="REST API Design" /> defines
-                  the boundaries between client and server. Persistence lives
-                  in <T n="SQL" />: structured, verifiable, slow to lie.
+                  The data layer is where most of my work lives.{" "}
+                  <T n="Python" /> is the primary instrument — fast for
+                  exploration, rigorous in production. <T n="SQL" /> sits
+                  underneath everything: structured, verifiable, honest about
+                  what the data actually contains. When the problem calls for
+                  prediction, I reach for <T n="XGBoost / SHAP" /> — not
+                  because it is fashionable, but because it can be made to
+                  explain its own reasoning, and an auditable model is worth
+                  more than an accurate one that no one trusts.
                 </div>
 
-                {/* Data & intelligence paragraph */}
+                {/* Output layer paragraph */}
                 <div>
-                  When the problem shifts from web to intelligence,{" "}
-                  <T n="Python" /> becomes the language of choice — fast to
-                  prototype, serious in production. When interpretability is a
-                  requirement and not a luxury: <T n="Machine Learning" />, and
-                  specifically <T n="XGBoost / SHAP" />, to build models that
-                  explain their own reasoning — the scorecard a lender can
-                  actually read, the prediction an auditor can defend. Before
-                  any of this reaches a screen, <T n="Figma" /> serves as the
-                  thinking tool — the whiteboard that saves three sprint cycles
-                  of UI debate.
+                  Before any output reaches a stakeholder, <T n="Tableau" />{" "}
+                  or a custom dashboard translates the numbers into something a
+                  non-technical reader can navigate without a guide. That
+                  translation is not decoration — it is the product. When a
+                  project demands a full operational system, I build the
+                  surrounding layer in <T n="TypeScript" /> and{" "}
+                  <T n="React" />, with <T n="SQL" /> at the persistence
+                  boundary. The web layer serves the data layer, not the other
+                  way around.
                 </div>
 
-                {/* Systems paragraph */}
-                <div>
-                  At the system level, <T n="System Architecture" /> is not a
-                  deliverable — it is a discipline. Define the boundaries before
-                  writing a single line; let structure constrain the chaos. When
-                  the problem escapes the browser and lives at the hardware
-                  edge, <T n="IoT Integration" /> closes the loop between raw
-                  sensor data and software decision.
-                </div>
               </div>
 
-              {/* Mobile-only: inline annotation notes for this section */}
               <MobileAnnotation notes={[
-                { label: "domains", text: "web · data · systems" },
-                { label: "method",  text: "constraint-first design" },
+                { label: "stack", text: "Python · SQL · XGBoost · SHAP · Tableau" },
+                { label: "principle", text: "the web layer serves the data layer" },
               ]} />
             </motion.section>
 
@@ -211,23 +190,27 @@ export default function AboutChapter() {
                 </span>
               </div>
 
-              {/* === EDITABLE: Off the clock paragraph ===
-                  Personal narrative — no skill tokens. Ends with the chaos/order callback. */}
-              <p className="text-primary/80 leading-relaxed text-[14px] md:text-[15px]">
-                Outside the terminal, I tend toward things that reward deliberate
-                attention: a quiet morning with strong coffee and an architecture
-                paper, a long walk without a destination mapped, or an afternoon
-                spent learning how something works simply because it is
-                interesting — not because it is on a roadmap. I read widely,
-                across disciplines, and I have found that the most useful
-                engineering instincts arrive from the strangest directions.
-                Somehow, every form of deliberate chaos I encounter outside of
-                work ends up informing some future instance of order inside it.
+              <p className="text-primary/80 leading-relaxed text-[14px] md:text-[15px] mb-4 md:mb-5">
+                Outside of work I <span className="text-amber font-semibold">write poetry and read fiction</span> — two habits
+                that have, unexpectedly, made me a better analyst. Poetry is
+                the <span className="text-amber font-semibold">discipline of saying something precise with as few words as
+                possible</span>, and knowing which detail to leave out. That instinct
+                transfers directly to the work of building a dashboard or
+                writing an executive summary: <span className="text-amber font-semibold">most of what you know should not
+                be in the final output</span>. Fiction taught me to <span className="text-amber font-semibold">read for what is
+                not being said</span> — a skill that proves useful whenever a
+                stakeholder brief contains assumptions nobody thought to write
+                down.
               </p>
 
-              {/* Mobile-only: inline annotation notes + status for this section */}
+              <p className="text-primary/80 leading-relaxed text-[14px] md:text-[15px]">
+                The rest of the time: strong coffee, and long walks without a
+                destination decided in advance.
+              </p>
+
               <MobileAnnotation notes={[
-                { label: "output", text: "ship boring code. debug less." },
+                { label: "off clock", text: "poetry · fiction · long walks" },
+                { label: "transfer", text: "knowing what to leave out" },
               ]} />
 
               {/* Mobile-only: status indicator */}
@@ -258,37 +241,44 @@ export default function AboutChapter() {
           >
             <motion.div variants={fadeUp}>
               <MarginAnnotation
-                label="perf"
-                text="speed is a feature, not a checkbox"
+                label="north star"
+                text="decisions, not dashboards"
                 className="border-t-0 pt-0"
               />
             </motion.div>
 
             <motion.div variants={fadeUp}>
               <MarginAnnotation
-                label="pred"
-                text="predictable > clever, always"
+                label="last mile"
+                text="explainability is not optional"
               />
             </motion.div>
 
             <motion.div variants={fadeUp}>
               <MarginAnnotation
-                label="domains"
-                text="web · data · systems"
+                label="stack"
+                text="Python · SQL · XGBoost · SHAP · Tableau"
               />
             </motion.div>
 
             <motion.div variants={fadeUp}>
               <MarginAnnotation
-                label="method"
-                text="constraint-first design"
+                label="principle"
+                text="the web layer serves the data layer"
               />
             </motion.div>
 
             <motion.div variants={fadeUp}>
               <MarginAnnotation
-                label="output"
-                text="ship boring code. debug less."
+                label="off clock"
+                text="poetry · fiction · long walks"
+              />
+            </motion.div>
+
+            <motion.div variants={fadeUp}>
+              <MarginAnnotation
+                label="transfer"
+                text="knowing what to leave out"
               />
             </motion.div>
 

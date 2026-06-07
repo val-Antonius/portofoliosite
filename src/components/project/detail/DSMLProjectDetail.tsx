@@ -22,6 +22,21 @@ const item = {
 };
 
 import MetricCard from "../../ui/MetricCard";
+
+const highlightText = (text: string) => {
+  if (!text) return "";
+  const parts = text.split(/\*\*(.*?)\*\*/g);
+  return parts.map((part, index) =>
+    index % 2 === 1 ? (
+      <span key={index} className="text-amber font-semibold">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+};
+
 /**
  * Layout B — Data Science / ML lab report style.
  *
@@ -64,7 +79,7 @@ export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
               <MetricCard
                 key={i}
                 label={metric.label}
-                value={Number(metric.value)}
+                value={metric.value}
                 prefix={metric.prefix}
                 suffix={metric.suffix}
                 isPositive={metric.isPositive}
@@ -96,7 +111,7 @@ export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
             <div className="flex-1 h-px" style={{ background: "var(--border)" }} />
           </div>
           <p className="text-sm leading-relaxed" style={{ color: "var(--text-primary)" }}>
-            {project.approach}
+            {highlightText(project.approach)}
           </p>
         </motion.div>
       )}
@@ -126,7 +141,7 @@ export default function DSMLProjectDetail({ project }: DSMLProjectDetailProps) {
                   className="w-1.5 h-1.5 rounded-full mt-2 shrink-0"
                   style={{ background: "var(--accent-green)" }}
                 />
-                {finding}
+                <span className="flex-1">{highlightText(finding)}</span>
               </li>
             ))}
           </ul>

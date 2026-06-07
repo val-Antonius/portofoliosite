@@ -57,7 +57,7 @@ export default function OverviewChapter() {
           <span className="font-mono text-xs uppercase tracking-widest text-amber mb-6">Introduction</span>
           <h1 className="font-display tracking-tight text-primary leading-tight mb-8">
             <span className="text-4xl md:text-5xl lg:text-6xl font-bold block mb-3">
-              I'm <span className="text-amber">Val Antonius</span>.
+              I'm <span className="text-amber">Val Antonius</span>
             </span>
             <span className="italic text-secondary font-light block" style={{ fontSize: "clamp(20px, 3vw, 28px)", lineHeight: "1.4" }}>
               Between data and decisions, I look for meaning.
@@ -66,20 +66,15 @@ export default function OverviewChapter() {
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-green shadow-[0_0_8px_var(--accent-green)] animate-pulse" />
             <p className="font-mono text-xs md:text-sm uppercase tracking-widest text-secondary font-semibold">
-              Data Analyst
-            </p>
-            <span className="w-2 h-2 rounded-full bg-green shadow-[0_0_8px_var(--accent-green)] animate-pulse" />
-            <p className="font-mono text-xs md:text-sm uppercase tracking-widest text-secondary font-semibold">
-              Business Intelligence
+              Data & Business Analyst
             </p>
           </div>
         </motion.div>
 
         {/* Right Side: Selected Projects */}
         <motion.div variants={panelAnim} className="lg:col-span-6 xl:col-span-5 flex flex-col py-4">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#6B6560] shrink-0">selected projects</span>
-            <div className="h-px bg-border flex-1" />
+          <div className="mb-6">
+            <span className="font-mono text-xs uppercase tracking-widest text-secondary shrink-0">selected projects</span>
           </div>
 
           {/* Desktop interactive list */}
@@ -129,7 +124,7 @@ export default function OverviewChapter() {
           </div>
           {/* Metric 4 — col 2, row 2 */}
           <div className="flex flex-col items-start pl-4 pr-0 py-4 md:py-0 md:px-8 border-t md:border-t-0 border-border">
-            <MetricCard label="Hours Worked" value={110} suffix="h+" variant="borderless" />
+            <MetricCard label="Domains" value={4} suffix="+" variant="borderless" />
           </div>
         </div>
       </motion.div>

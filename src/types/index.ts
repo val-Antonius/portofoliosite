@@ -27,7 +27,7 @@ export interface Project {
   type: string;
   description: string;
   impact: string[];
-  category?: 'web' | 'ds-ml';
+  category?: 'web' | 'Data-BI';
   techTags: string[];
   metrics: ProjectMetric[];
 

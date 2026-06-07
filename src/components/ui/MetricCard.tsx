@@ -4,7 +4,7 @@ import { useCountUp } from "../../hooks/useCountUp";
 
 interface MetricCardProps {
   label: string;
-  value: number;
+  value: number | string;
   prefix?: string;
   suffix?: string;
   isPositive?: boolean;
@@ -21,7 +21,38 @@ export default function MetricCard({
   className = "",
   variant = "card"
 }: MetricCardProps) {
-  const { count, ref } = useCountUp(value, 1200);
+  // Try to parse the value as a number (handling commas if present)
+  let numericValue: number | null = null;
+  let rawStringValue: string | null = null;
+
+  if (typeof value === "number") {
+    numericValue = value;
+  } else {
+    // Remove commas to check if it's a number (e.g. "522,885" -> "522885")
+    const cleanStr = value.replace(/,/g, "");
+    const parsed = parseFloat(cleanStr);
+    if (!isNaN(parsed)) {
+      numericValue = parsed;
+    } else {
+      rawStringValue = value; // Non-numeric string like "Zero"
+    }
+  }
+
+  const { count, ref } = useCountUp(numericValue ?? 0, 1200);
+
+  // Helper to format the displayed count/value
+  const getDisplayValue = () => {
+    if (rawStringValue !== null) {
+      return rawStringValue;
+    }
+    // If it was a string with commas originally, format the animated number with commas
+    if (typeof value === "string" && value.includes(",")) {
+      return count.toLocaleString("en-US");
+    }
+    return count;
+  };
+
+  const displayVal = getDisplayValue();
 
   if (variant === "borderless") {
     return (
@@ -40,7 +71,7 @@ export default function MetricCard({
           style={{ color: isPositive ? "var(--accent-green)" : "var(--accent-amber)" }}
         >
           {prefix}
-          {count}
+          {displayVal}
           {suffix}
         </span>
       </div>
@@ -64,7 +95,7 @@ export default function MetricCard({
         style={{ color: isPositive ? "var(--accent-green)" : "var(--accent-red)" }}
       >
         {prefix}
-        {count}
+        {displayVal}
         {suffix}
       </span>
     </div>

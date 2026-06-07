@@ -19,22 +19,31 @@ const itemAnim = {
 
 export default function WorkChapter() {
   const { selectedProjectId, setSelectedProjectId } = usePortfolioContext();
-  const [activeCategory, setActiveCategory] = useState<'ALL' | 'WEB' | 'DS/ML'>('ALL');
+  const [activeCategory, setActiveCategory] = useState<'DATA-BI' | 'WEB' | 'ALL'>('DATA-BI');
 
   const selectedProject = portfolioData.projects.find(p => p.id === selectedProjectId);
 
   const categories = [
-    { id: 'ALL', label: 'ALL' },
+    { id: 'DATA-BI', label: 'DATA / BI' },
     { id: 'WEB', label: 'WEB ENGINEERING' },
-    { id: 'DS/ML', label: 'DATA SCIENCE / ML' }
+    { id: 'ALL', label: 'ALL' }
   ] as const;
 
   const filteredProjects = portfolioData.projects.filter(p => {
     if (activeCategory === 'ALL') return true;
     if (activeCategory === 'WEB') return p.category === 'web';
-    if (activeCategory === 'DS/ML') return p.category === 'ds-ml';
+    if (activeCategory === 'DATA-BI') return p.category === 'Data-BI';
     return true;
   });
+
+  // Sort display projects: under 'ALL' tab, 'Data-BI' projects are placed first
+  const displayProjects = activeCategory === 'ALL'
+    ? [...filteredProjects].sort((a, b) => {
+        const aVal = a.category === 'Data-BI' ? 0 : 1;
+        const bVal = b.category === 'Data-BI' ? 0 : 1;
+        return aVal - bVal;
+      })
+    : filteredProjects;
 
   return (
     <div className="h-full relative overflow-hidden flex flex-col items-stretch pt-8 md:pt-12">
@@ -46,64 +55,41 @@ export default function WorkChapter() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.2 }}
-            className="flex-1 flex flex-col md:flex-row h-full overflow-hidden pb-12 md:pb-0"
+            className="flex-1 flex flex-col h-full overflow-hidden pb-12 md:pb-0"
           >
-            {/* Mobile Horizontal Chips */}
-            <div className="md:hidden w-full px-6 mb-6 overflow-x-auto hidden-scrollbar flex items-center gap-2 shrink-0">
+            {/* Horizontal Filter Tabs at the Top (unified for Mobile & Desktop) */}
+            <div className="w-full px-6 md:px-12 mb-6 flex items-center gap-6 overflow-x-auto hidden-scrollbar shrink-0 border-b border-border/30 pb-3">
               {categories.map(cat => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 py-1.5 rounded-full text-[11px] uppercase tracking-widest transition-colors border ${
+                  className={`relative pb-3 text-[11px] font-semibold uppercase tracking-widest transition-all cursor-pointer ${
                     activeCategory === cat.id
-                      ? "bg-primary text-canvas border-primary font-bold"
-                      : "bg-canvas text-secondary border-border hover:text-primary hover:border-secondary"
+                      ? "text-primary font-bold"
+                      : "text-secondary hover:text-primary font-light"
                   }`}
                 >
-                  {cat.label}
+                  <span>{cat.label}</span>
+                  {activeCategory === cat.id && (
+                    <motion.div
+                      layoutId="activeFilterTab"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-amber"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </button>
               ))}
             </div>
 
-            {/* Desktop Vertical Sidebar */}
-            <div className="hidden md:flex flex-col pl-12 pr-6 pt-2 shrink-0">
-              <div className="flex flex-col gap-8">
-                {categories.map(cat => (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    className="flex flex-col items-center gap-4 group"
-                  >
-                    <span 
-                      className={`text-[11px] uppercase tracking-widest transition-all origin-center ${
-                        activeCategory === cat.id 
-                          ? "text-primary font-bold scale-105" 
-                          : "text-secondary hover:text-primary font-light"
-                      }`}
-                      style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-                    >
-                      {cat.label}
-                    </span>
-                    {/* Active Indicator Line */}
-                    <div 
-                      className={`w-[2px] transition-all duration-300 bg-amber ${
-                        activeCategory === cat.id ? 'h-6' : 'h-0 group-hover:h-3'
-                      }`}
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex-1 px-6 md:px-0 md:pr-12 overflow-y-auto hidden-scrollbar h-full pb-12">
-              {filteredProjects.length === 0 ? (
+            <div className="flex-1 px-6 md:px-12 overflow-y-auto hidden-scrollbar h-full pb-12">
+              {displayProjects.length === 0 ? (
                 <div className="w-full h-full min-h-[300px] flex flex-col items-center justify-center panel border-dashed">
                   <div className="w-12 h-12 rounded-full bg-canvas border border-border flex items-center justify-center mb-4">
                     <span className="font-mono text-secondary">?</span>
                   </div>
                   <h3 className="text-primary font-display mb-2 text-xl">Coming Soon</h3>
                   <p className="text-secondary text-sm text-center max-w-sm">
-                    New case studies focusing on Data Science & Machine Learning are currently being documented.
+                    New case studies focusing on Data & Business Intelligence are currently being documented.
                   </p>
                 </div>
               ) : (
@@ -113,7 +99,7 @@ export default function WorkChapter() {
                   animate="show"
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-fr pb-12"
                 >
-                  {filteredProjects.map(project => (
+                  {displayProjects.map(project => (
                     <motion.div variants={itemAnim} key={project.id} className="h-full">
                       <ProjectCard 
                         project={project} 

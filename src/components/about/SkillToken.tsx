@@ -17,7 +17,7 @@ interface SkillTokenProps {
 
 const CATEGORY_DOT: Record<string, string> = {
   web:     "var(--accent-amber)",
-  "ds-ml": "var(--accent-green)",
+  "Data-BI": "var(--accent-green)",
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────

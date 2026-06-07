@@ -23,7 +23,7 @@ export default function TopBar() {
       </div>
 
       {/* Center: Navigation — fills all remaining space */}
-      <nav className="flex items-center gap-4 md:gap-6 overflow-x-auto hidden-scrollbar py-1 flex-1 justify-start md:justify-center">
+      <nav className="flex items-center gap-4 md:gap-8 overflow-x-auto hidden-scrollbar py-1 flex-1 justify-start md:justify-center">
         {chapters.map((chapter) => {
           const iconName = chapter.icon
             .split("-")
@@ -74,7 +74,7 @@ export default function TopBar() {
               </div>
               {/* Text label — always visible */}
               <span
-                className={`text-[10px] md:text-[11px] uppercase tracking-widest whitespace-nowrap transition-colors ${
+                className={`text-[11px] md:text-[11px] uppercase tracking-widest whitespace-nowrap transition-colors ${
                   isActive ? "text-amber font-bold" : "text-secondary font-medium"
                 }`}
               >

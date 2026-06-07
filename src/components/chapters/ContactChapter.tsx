@@ -27,11 +27,11 @@ export default function ContactChapter() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="px-6 md:px-12 h-full flex flex-col items-center justify-center pt-8 md:pt-12 space-y-8 pb-24 overflow-y-auto hidden-scrollbar"
+      className="px-6 md:px-12 h-full flex flex-col items-center justify-start pt-8 md:pt-12 space-y-8 pb-24 overflow-y-auto hidden-scrollbar"
     >
-      <div className="text-center max-w-2xl mx-auto space-y-6 shrink-0 mt-8">
+      <div className="text-center max-w-2xl mx-auto space-y-6 shrink-0 mt-0">
         <p className="text-primary/70 text-lg leading-relaxed">
-          Open for new opportunities and interesting technical challenges. If you need a reliable engine for your product, let's talk.
+          Open to full-time opportunities in <span className="text-amber font-semibold">data analytics</span> and <span className="text-amber font-semibold">business intelligence</span>. If your team is sitting on data that hasn't told its full story yet — <span className="text-amber font-semibold">let's talk</span>.
         </p>
       </div>
 

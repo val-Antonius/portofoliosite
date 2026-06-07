@@ -26,15 +26,29 @@ export default function OverviewProjectList({ projects, onExplore }: OverviewPro
           >
             <button
               onClick={() => setExpandedId(isExpanded ? null : project.id)}
-              className="w-full text-left font-display text-2xl md:text-3xl text-primary hover:text-amber transition-colors flex items-center justify-between cursor-pointer focus:outline-none py-1"
+              className="w-full text-left group flex flex-col justify-start cursor-pointer focus:outline-none py-1.5"
             >
-              <span>{project.title}</span>
-              <motion.span
-                animate={{ rotate: isExpanded ? 45 : 0 }}
-                className="text-secondary hover:text-amber text-2xl font-light font-sans shrink-0 ml-4"
-              >
-                +
-              </motion.span>
+              {/* Timeline, Type & Category row (always visible) */}
+              <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-secondary mb-1.5">
+                <span>{project.timeline}</span>
+                <span>•</span>
+                <span>{project.type}</span>
+                <span>•</span>
+                <span className={project.category === 'Data-BI' ? 'text-green font-semibold' : 'text-amber font-semibold'}>
+                  {project.category === 'Data-BI' ? 'Data - BI' : 'WEB'}
+                </span>
+              </div>
+              <div className="flex items-center justify-between w-full">
+                <span className="font-display text-lg md:text-xl text-primary group-hover:text-amber transition-colors leading-snug">
+                  {project.title}
+                </span>
+                <motion.span
+                  animate={{ rotate: isExpanded ? 45 : 0 }}
+                  className="text-secondary group-hover:text-amber text-2xl font-light font-sans shrink-0 ml-4"
+                >
+                  +
+                </motion.span>
+              </div>
             </button>
 
             <AnimatePresence initial={false}>
@@ -47,15 +61,6 @@ export default function OverviewProjectList({ projects, onExplore }: OverviewPro
                   className="overflow-hidden"
                 >
                   <div className="pt-4 pb-2 space-y-4">
-                    {/* Meta info */}
-                    <div className="flex flex-wrap gap-4 text-xs font-mono uppercase tracking-wider text-secondary">
-                      <span>{project.timeline}</span>
-                      <span>•</span>
-                      <span>{project.type}</span>
-                      <span>•</span>
-                      <span className="text-amber">{project.category === 'ds-ml' ? 'DS/ML' : 'WEB'}</span>
-                    </div>
-
                     {/* Tagline */}
                     <p className="text-sm text-secondary leading-relaxed font-light max-w-xl">
                       {project.tagline || project.description}

@@ -11,6 +11,20 @@ import {
 } from "lucide-react";
 import { PipelineStep } from "../../../types";
 
+const highlightText = (text: string) => {
+  if (!text) return "";
+  const parts = text.split(/\*\*(.*?)\*\*/g);
+  return parts.map((part, index) =>
+    index % 2 === 1 ? (
+      <span key={index} className="text-amber font-semibold">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+};
+
 interface MLPipelineProps {
   steps: PipelineStep[];
 }
@@ -45,14 +59,13 @@ export default function MLPipeline({ steps }: MLPipelineProps) {
   return (
     <motion.div variants={item} className="flex flex-col gap-4">
       {/* Section label */}
-      <div className="flex items-center gap-3">
+      <div className="flex justify-between items-center mb-2">
         <span
           className="text-[10px] font-mono uppercase tracking-widest"
           style={{ color: "var(--text-secondary)" }}
         >
-          ML Pipeline
+          Pipeline
         </span>
-        <div className="flex-1 h-px" style={{ background: "var(--border)" }} />
         <span
           className="text-[10px] font-mono"
           style={{ color: "var(--text-secondary)" }}
@@ -63,20 +76,7 @@ export default function MLPipeline({ steps }: MLPipelineProps) {
 
       {/* ── Desktop: horizontal flow ── */}
       <div className="hidden md:block">
-        {/* Connector track — sits behind the cards */}
         <div className="relative">
-          {/* Horizontal line connecting all step icons */}
-          <div
-            className="absolute left-0 right-0"
-            style={{
-              // Aligns with the vertical center of the 28px icon badge (top padding ~24px + 14px center)
-              top: 38,
-              height: 1,
-              background: `linear-gradient(to right, var(--accent-amber), var(--border))`,
-              opacity: 0.5,
-            }}
-          />
-
           {/* Cards row */}
           <div
             className="relative grid gap-3"
@@ -84,7 +84,6 @@ export default function MLPipeline({ steps }: MLPipelineProps) {
           >
             {steps.map((step, i) => {
               const Icon = ICON_MAP[step.icon] ?? Database;
-              const isLast = i === steps.length - 1;
 
               return (
                 <motion.div
@@ -92,36 +91,29 @@ export default function MLPipeline({ steps }: MLPipelineProps) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="relative flex flex-col"
+                  className="relative flex flex-col group"
                 >
-                  {/* Icon badge — sits on the connector line */}
+                  {/* Icon badge */}
                   <div className="flex flex-col items-center mb-4">
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center z-10 relative"
-                      style={{
-                        background: "var(--bg-canvas)",
-                        border: `2px solid ${i === 0 ? "var(--accent-amber)" : "var(--border)"}`,
-                        boxShadow: i === 0 ? "0 0 0 3px var(--accent-amber-bg)" : "none",
-                      }}
+                      className={`w-10 h-10 rounded-full flex items-center justify-center z-10 relative transition-all duration-300 border-2 bg-canvas ${
+                        i === 0
+                          ? "border-amber shadow-[0_0_0_3px_var(--accent-amber-bg)] text-amber"
+                          : "border-border text-secondary group-hover:border-amber group-hover:scale-110"
+                      }`}
                     >
                       <Icon
                         size={16}
-                        style={{
-                          color: i === 0 ? "var(--accent-amber)" : "var(--text-secondary)",
-                        }}
+                        className={`transition-colors duration-300 ${
+                          i === 0 ? "text-amber" : "text-secondary group-hover:text-amber"
+                        }`}
                       />
                     </div>
-
-  
                   </div>
 
                   {/* Card body */}
                   <div
-                    className="flex-1 rounded-lg p-3 flex flex-col gap-1.5"
-                    style={{
-                      background: "var(--bg-card)",
-                      border: "1px solid var(--border)",
-                    }}
+                    className="flex-1 rounded-lg p-3 flex flex-col gap-1.5 transition-all duration-300 border bg-card border-border group-hover:border-amber/60 group-hover:bg-amber-bg/15 group-hover:-translate-y-1 group-hover:shadow-[0_4px_12px_rgba(0,0,0,0.04)]"
                   >
                     <div className="flex items-center gap-1.5">
                       <span
@@ -146,7 +138,7 @@ export default function MLPipeline({ steps }: MLPipelineProps) {
                       className="text-[11px] leading-relaxed"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      {step.description}
+                      {highlightText(step.description)}
                     </p>
                   </div>
                 </motion.div>
@@ -213,7 +205,7 @@ export default function MLPipeline({ steps }: MLPipelineProps) {
                   className="text-xs leading-relaxed"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  {step.description}
+                  {highlightText(step.description)}
                 </p>
               </div>
             </motion.div>
