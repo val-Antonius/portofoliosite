@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { portfolioData } from "@/data/portfolio";
 import HealthStatusCard from "../ui/HealthStatusCard";
 
@@ -45,7 +46,11 @@ export default function ContactChapter() {
         <div className="flex-1 max-w-md w-full panel flex flex-col items-center justify-between p-8 space-y-8">
           <div className="w-full flex-1 flex flex-col justify-center items-center space-y-6">
             {/* Email Section */}
-            <a href={`mailto:${contact.email}`} className="group flex flex-col items-center justify-center gap-4 hover:text-amber transition-colors w-full">
+            <a
+              href={`mailto:${contact.email}`}
+              onClick={() => track("contact_click", { method: "email", email: contact.email })}
+              className="group flex flex-col items-center justify-center gap-4 hover:text-amber transition-colors w-full"
+            >
               <div className="w-16 h-16 rounded-full bg-amber-bg flex items-center justify-center text-amber group-hover:scale-110 transition-transform">
                 <Mail size={24} />
               </div>
@@ -61,11 +66,23 @@ export default function ContactChapter() {
 
             {/* Social Links Section */}
             <div className="w-full flex flex-col sm:flex-row gap-4">
-              <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
+              <a
+                href={contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("contact_click", { method: "linkedin", url: contact.linkedin })}
+                className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary"
+              >
                 <LinkedinIcon size={18} />
                 <span className="text-sm font-medium">LinkedIn</span>
               </a>
-              <a href={contact.github} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary">
+              <a
+                href={contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("contact_click", { method: "github", url: contact.github })}
+                className="flex-1 flex items-center justify-center gap-3 px-4 py-3 bg-canvas border border-border rounded-lg hover:border-amber hover:text-amber transition-colors text-primary"
+              >
                 <GithubIcon size={18} />
                 <span className="text-sm font-medium">GitHub</span>
               </a>

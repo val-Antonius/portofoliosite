@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import * as Icons from "lucide-react";
+import { track } from "@vercel/analytics";
 import { usePortfolioContext } from "@/context/PortfolioContext";
 
 const poseMap: Record<string, string> = {
@@ -90,6 +91,7 @@ export default function TopBar() {
         <a
           href="/Antonius Valentino-CV.pdf"
           download="Antonius Valentino-CV.pdf"
+          onClick={() => track("download_cv")}
           className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-secondary hover:text-amber transition-colors cursor-pointer"
         >
           <span className="md:hidden">CV</span>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { Project } from "../../types";
 import WebProjectDetail from "./detail/WebProjectDetail";
 import DSMLProjectDetail from "./detail/DSMLProjectDetail";
@@ -143,6 +144,7 @@ export default function ProjectDetail({ project, onBack }: ProjectDetailProps) {
                 href="/case_study.html"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track("read_case_study", { language: "id", projectId: project.id })}
                 className="px-2.5 py-1 text-[10px] font-mono font-medium text-secondary hover:text-amber hover:bg-amber-bg/20 transition-all border-r border-border/40"
               >
                 ID
@@ -151,6 +153,7 @@ export default function ProjectDetail({ project, onBack }: ProjectDetailProps) {
                 href="/case_study_english.html"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track("read_case_study", { language: "en", projectId: project.id })}
                 className="px-2.5 py-1 text-[10px] font-mono font-medium text-secondary hover:text-amber hover:bg-amber-bg/20 transition-all"
               >
                 EN
@@ -165,6 +168,7 @@ export default function ProjectDetail({ project, onBack }: ProjectDetailProps) {
               <a
                 href="/Case Study 2026 - Data Analyst & Business Intelligence.pdf"
                 download="Case Study 2026 - Data Analyst & Business Intelligence.pdf"
+                onClick={() => track("download_case_study", { language: "id", projectId: project.id })}
                 className="px-2.5 py-1 text-[10px] font-mono font-medium text-secondary hover:text-amber hover:bg-amber-bg/20 transition-all border-r border-border/40"
               >
                 ID
@@ -172,6 +176,7 @@ export default function ProjectDetail({ project, onBack }: ProjectDetailProps) {
               <a
                 href="/Case Study 2026 - Data Analyst & Business Intelligence - eng.pdf"
                 download="Case Study 2026 - Data Analyst & Business Intelligence - eng.pdf"
+                onClick={() => track("download_case_study", { language: "en", projectId: project.id })}
                 className="px-2.5 py-1 text-[10px] font-mono font-medium text-secondary hover:text-amber hover:bg-amber-bg/20 transition-all"
               >
                 EN

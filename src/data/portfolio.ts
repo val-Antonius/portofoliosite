@@ -187,7 +187,7 @@ export const portfolioData: PortfolioData = {
         { category: "Explainability", items: ["SHAP", "TreeExplainer", "Force Plots"] },
         { category: "Deployment", items: ["Streamlit", "Python", "Pickle", "JSON"] },
       ],
-      link: "https://github.com/val-Antonius/credit-scoring-umkm",
+      link: "https://shap-credit-scoring.streamlit.app/",
       metrics: [
         { label: "AUC-ROC", value: "86.4", suffix: "%", isPrimary: true, isPositive: true },
         { label: "F1-Minority", value: "0.4421", isPositive: true },
@@ -227,7 +227,7 @@ export const portfolioData: PortfolioData = {
         { category: "Explainability", items: ["SHAP", "Feature Attribution", "Calibration Analysis"] },
         { category: "Deployment", items: ["Streamlit", "Plotly", "Python", "Pickle"] },
       ],
-      link: "https://github.com/val-Antonius/xflair",
+      link: "https://xflair.streamlit.app/",
       metrics: [
         { label: "MAE Improvement", value: "27.9", suffix: "%", isPrimary: true, isPositive: true },
         { label: "Events Processed", value: "522,885", isPositive: true },
@@ -306,7 +306,7 @@ export const portfolioData: PortfolioData = {
         { category: "Optimization", items: ["Excel", "Safety Stock Formulas", "EOQ"] },
         { category: "Visualization", items: ["Power BI", "Data Modeling"] }
       ],
-      link: "https://github.com/username/supply-chain-analytics-pipeline",
+      link: "https://github.com/val-Antonius/supply-chain-performance-analytics",
       metrics: [
         { label: "Overall Late Rate", value: "54.83", suffix: "%", isPrimary: true, isPositive: false },
         { label: "First Class Late Rate", value: "95.32", suffix: "%", isPositive: false },

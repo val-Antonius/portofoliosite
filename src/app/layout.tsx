@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, JetBrains_Mono, DM_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const displayFont = DM_Serif_Display({
@@ -35,6 +36,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-canvas text-primary">
         {children}
+        <Analytics />
       </body>
     </html>
   );

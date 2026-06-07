@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink, Lock } from "lucide-react";
+import { track } from "@vercel/analytics";
 
 interface DarkSummaryBoxProps {
   tagline: string;
@@ -74,6 +75,7 @@ export default function DarkSummaryBox({ tagline, summary, type, link }: DarkSum
             href={link}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track("view_live_project", { url: link })}
             className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest transition-opacity hover:opacity-80"
             style={{ color: "var(--accent-amber)" }}
           >
