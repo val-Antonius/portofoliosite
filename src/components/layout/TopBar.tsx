@@ -41,11 +41,10 @@ export default function TopBar() {
             >
               {/* Icon circle — hidden on mobile, visible on sm+ */}
               <div
-                className={`hidden sm:flex w-8 h-8 rounded-full items-center justify-center transition-all bg-card border shadow-sm overflow-hidden ${
-                  isActive
-                    ? "border-amber text-amber scale-105"
-                    : "border-border text-primary group-hover:border-amber"
-                }`}
+                className={`hidden sm:flex w-8 h-8 rounded-full items-center justify-center transition-all bg-card border shadow-sm overflow-hidden ${isActive
+                  ? "border-amber text-amber scale-105"
+                  : "border-border text-primary group-hover:border-amber"
+                  }`}
               >
                 <AnimatePresence mode="wait">
                   {isActive ? (
@@ -75,9 +74,8 @@ export default function TopBar() {
               </div>
               {/* Text label — always visible */}
               <span
-                className={`text-[11px] md:text-[11px] uppercase tracking-widest whitespace-nowrap transition-colors ${
-                  isActive ? "text-amber font-bold" : "text-secondary font-medium"
-                }`}
+                className={`text-[11px] md:text-[11px] uppercase tracking-widest whitespace-nowrap transition-colors ${isActive ? "text-amber font-bold" : "text-secondary font-medium"
+                  }`}
               >
                 {chapter.id}
               </span>
@@ -89,8 +87,8 @@ export default function TopBar() {
       {/* Right side: Download CV — "CV" on mobile, "Download CV" on md+ */}
       <div className="shrink-0">
         <a
-          href="/Antonius Valentino-CV.pdf"
-          download="Antonius Valentino-CV.pdf"
+          href="/Antonius_Valentino_CV_2026.pdf"
+          download="Antonius_Valentino_CV_2026.pdf"
           onClick={() => track("download_cv")}
           className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-secondary hover:text-amber transition-colors cursor-pointer"
         >
